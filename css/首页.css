@@ -1,1 +1,66 @@
+/*三个标签*/
+.tags {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 95%;
+	height: 100px;
+	margin: 20px;
+}
+.tag {
+	width: 250px;
+	height: 100%;
+	margin-right: 20px;
+	padding: 15px;
+	font-size: 16px;
+	font-family: 'Microsoft YaHei';
+	line-height: 30px;
+	color: #b5b5b5;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.tag p {
+	font-size: 22px;
+	font-weight: 700;
+	color: #000;
+}
+.tag i {
+	float: right;
+	display: block;
+	width: 15px;
+	height: 15px;
+	margin-top: 8px;
+	background: url(../images/疑问.png) no-repeat;
+}
+
+/*详细信息*/
+.detail {
+	width: 95%;
+	height: 80%;
+	margin-left: 20px;
+	padding: 30px;
+	font-size: 14px;
+	font-family: 'Mirosoft YaHei';
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.table {
+	width: 100%;
+	max-width: 100%;
+	border-collapse: collapse;
+}
+.table thead {
+	background-color: #ececec;
+}
+.table th,
+.table td {
+	text-align: left;
+	height: 50px;
+	padding-left: 15px;
+	border-bottom: 1px solid #dee2e6;
+}
+.table tr:hover {
+	background-color: #e4e4e4;
+	cursor: pointer;
+}
 
