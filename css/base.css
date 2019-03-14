@@ -1,0 +1,153 @@
+/*公共页面设计*/
+* {
+	margin: 0;
+	padding: 0;
+}
+ul {
+	list-style: none;
+}
+a {
+	text-decoration: none;
+}
+.main {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-start;
+	width: 100%;
+	height: 665px;
+}
+/*侧边栏*/
+aside {
+	width: 20%;
+	height: 100%;
+	padding-top: 20px;
+	background-color: #001629;
+	box-sizing: border-box;
+}
+/*logo和名称*/
+.logo {
+	padding-left: 25px;
+	height: 50px;
+}
+.logo img {
+	display: inline-block;
+	vertical-align: middle;
+}
+.name {
+	display: inline-block;
+	height: 25px;
+	margin-left: 10px;
+	vertical-align: middle;
+	line-height: 25px;
+	font-size: 18px;
+	color: #fafafa;
+}
+/*侧边栏目录*/
+.list a {
+	display: block;
+	padding-left: 25px;
+	width: 100%;
+	height: 40px;
+	box-sizing: border-box;
+}
+.list-direct {
+	display: inline-block;
+	margin-left: 10px;
+	line-height: 40px;
+	font-size: 14px;
+	color: #9099a1;
+}
+.icon {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+}
+.i-battery {
+	background: url(../images/电灯.png) no-repeat;
+}
+.i-map {
+	background: url(../images/地图.png) no-repeat;
+}
+.i-car {
+	background: url(../images/图标_报警灯.png) no-repeat;
+}
+.i-compute {
+	background: url(../images/统计分析.png) no-repeat;
+}
+.i-right {
+	float: right;
+	margin-top: 13px;
+	margin-right: 20px;
+}
+.i-right-top {
+	background: url(../images/向上箭头.png) no-repeat;
+}
+.i-right-bottom {
+	background: url(../images/向下箭头.png) no-repeat;
+}
+.list a:hover {
+	box-shadow: 0px 6px 6px #000;
+	background-color: #1890ff;
+}
+.list a:hover .list-direct {
+	text-shadow: 0px 2px 4px #000;
+	color: #eff7ff;
+} 
+.list a:hover .i-battery {
+	background: url(../images/电灯-点击.png) no-repeat;
+}
+.list a:hover .i-map {
+	background: url(../images/地图-点击.png) no-repeat;
+}
+.list a:hover .i-car {
+	background: url(../images/图标_报警灯-点击.png) no-repeat;
+}
+.list a:hover .i-compute {
+	background: url(../images/统计分析点击.png) no-repeat;
+}
+.list a:hover .i-right-top {
+	background: url(../images/向上点击.png) no-repeat;
+}
+.list a:hover .i-right-bottom {
+	background: url(../images/向下点击.png) no-repeat;
+}
+/*头部*/
+.head {
+	width: 80%;
+	height: 65px;
+	box-shadow: 0px 2px 2px #e1e3e6;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.ban-icon {
+	float: left;
+	display: block;
+	width: 20px;
+	height: 20px;
+	margin-top: 20px;
+	margin-left: 25px;
+	background: url(../images/栏目.png) no-repeat;
+}
+.personal {
+	float: right;
+	width: 150px;
+	height: 100%;
+	padding-top: 15px;
+	padding-left: 35px;
+	background-color: #fafafa;
+	box-sizing: border-box;
+}
+.sculpture {
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	vertical-align: middle;
+	background: url(../images/sculpture.png) no-repeat;
+}
+.nickname {
+	display: inline-block;
+	height: 25px;
+	margin-left: 10px;
+	line-height: 25px;
+	color: #000;
+}
