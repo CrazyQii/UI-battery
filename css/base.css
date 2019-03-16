@@ -14,6 +14,7 @@ a {
 	flex-direction: row;
 	justify-content: flex-start;
 	width: 100%;
+	min-width: 900px;
 	height: 1000px;
 	background-color: #f0f2f5;
 }
@@ -23,14 +24,47 @@ a {
 	height: 80%;
 	box-sizing: border-box;
 }
+/*基本表格样式*/
+.table {
+	width: 100%;
+	max-width: 100%;
+	border-collapse: collapse;
+}
+.table thead {
+	background-color: #ececec;
+}
+.table th,
+.table td {
+	text-align: left;
+	height: 50px;
+	padding-left: 15px;
+	border-bottom: 1px solid #dee2e6;
+}
+.table tr:hover {
+	background-color: #e4e4e4;
+	cursor: pointer;
+}
+/*小图标基本样式*/
+.icon {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	vertical-align: middle;
+}
 
 /*侧边栏*/
 aside {
+	position: relative;
 	width: 20%;
 	height: 100%;
 	padding-top: 20px;
 	background-color: #001629;
 	box-sizing: border-box;
+}
+.fix {
+	width: inherit;
+	height: inherit;
+	position: fixed;
 }
 /*logo和名称*/
 .logo {
@@ -64,11 +98,6 @@ aside {
 	line-height: 40px;
 	font-size: 14px;
 	color: #9099a1;
-}
-.icon {
-	display: inline-block;
-	width: 15px;
-	height: 15px;
 }
 .i-battery {
 	background: url(../images/电灯.png) no-repeat;
@@ -119,10 +148,11 @@ aside {
 .list a:hover .i-right-bottom {
 	background: url(../images/向下点击.png) no-repeat;
 }
+
 /*头部*/
 .head {
 	height: 65px;
-	box-shadow: 0px 2px 2px #e1e3e6;
+	box-shadow: 0px 4px 4px #e1e3e6;
 	background-color: #fff;
 	box-sizing: border-box;
 }
@@ -159,6 +189,21 @@ aside {
 	color: #000;
 }
 
+/*头部页面标题栏*/
+.title {
+	width: 100%;
+	height: 110px;
+	padding: 20px 35px;
+	box-shadow: 0 2px 2px #c6c6c6 inset;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.title p {
+	height: 40px;
+	font-size: 14px;
+	color: #a0a0a0;
+}
+
 /*底部信息*/
 footer {
 	display: block;
@@ -178,4 +223,62 @@ footer {
 }
 .help li a:hover {
 	color: #FF0000;
+}
+
+/*跳转页面公共部分*/
+.change-page {
+	float: right;
+	width: 650px;
+	height: 30px;
+	margin-top: 40px; 
+	font-size: 14px;
+}
+.change-page a {
+	display: inline-block;
+	float: left;
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	text-align: center;
+	line-height: 30px;
+	border-radius: 5px;
+	border: 1px solid #e7e7e7; 
+	color: #6d6d6d;
+	background-color: #fff;
+}
+.change-page a:hover {
+	color: #fff;
+	background-color: #108ee9;
+}
+.left {
+	background: url(../images/箭头-左.png) no-repeat;
+}
+a:hover .left {
+	background: url(../images/箭头-左-点击.png) no-repeat;
+}
+.right {
+	background: url(../images/箭头-右.png) no-repeat;
+}
+a:hover .right {
+	background: url(../images/箭头-右-点击.png) no-repeat;
+}
+.change-page .all {
+	display: inline-block;
+	width: 80px;
+	height: 100%;
+}
+a:hover p i {
+	background: url(../images/向下点击.png) no-repeat;
+}
+.tar-page {
+	padding: 0 10px;
+}
+.tar-page input {
+	width: 45px;
+	height: 100%;
+	margin: 0 10px;
+	border-radius: 5px;
+	border: 1px solid #e7e7e7;
+	text-align: center;
+	background-color: #fff;
 }

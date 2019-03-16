@@ -44,23 +44,5 @@
 	background-color: #fff;
 	box-sizing: border-box;
 }
-.table {
-	width: 100%;
-	max-width: 100%;
-	border-collapse: collapse;
-}
-.table thead {
-	background-color: #ececec;
-}
-.table th,
-.table td {
-	text-align: left;
-	height: 50px;
-	padding-left: 15px;
-	border-bottom: 1px solid #dee2e6;
-}
-.table tr:hover {
-	background-color: #e4e4e4;
-	cursor: pointer;
-}
+
 
