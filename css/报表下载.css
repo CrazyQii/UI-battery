@@ -1,0 +1,35 @@
+/*详细报告*/
+.report {
+	width: 95%;
+	height: 95%;
+	margin: 20px 25px;
+	padding: 30px;
+	background-color: #fff;
+	box-sizing: border-box;
+}
+.select {
+	margin-bottom: 20px;
+}
+/*报表类型选择按钮*/
+.style {
+	width: 60px;
+	height: 30px;
+	margin-left: -5px;
+	border: 1px solid #d9d9d9;
+	border-radius: 2px;
+	background-color: #fff;
+}
+.style:hover {
+	color: #3da2ff;
+	border-color: #3da2ff;
+}
+
+/*报表详细信息*/
+.i-report {
+	margin-left: 5px;
+	background: url(../images/下来.png) no-repeat center center;
+}
+.download a {
+	display: inline-block;
+	color: #3da2ff;
+}

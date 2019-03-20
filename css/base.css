@@ -24,24 +24,80 @@ a {
 	height: 80%;
 	box-sizing: border-box;
 }
+/*按钮公共样式*/
+button {
+	width: 65px;
+	height: 30px;
+	margin-left: 5px;
+	border-radius: 5px;
+	outline: none;
+}
+button:hover {
+	cursor: pointer;
+}
+/*输入框样式*/
+.search input {
+	width: 300px;
+	height: 30px;
+	padding-left: 15px;
+	border: 1px solid #d9d9d9;
+	border-radius: 5px;
+	box-sizing: border-box;
+}
+/*查询按钮*/
+.consult {
+	color: #fff;
+	background-color: #1890ff;
+	border: 1px solid #1890ff;
+}
+.consult:hover {
+	color: #fff;
+  	background-color: #0069d9;
+  	border-color: #0062cc;
+
+}
+.consult:focus {
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.5);
+}
+/*重置按钮*/
+.reset {
+	color: #6b6b6b;
+	background-color: #fff;
+	border: 1px solid #d9d9d9;
+}
+.reset:hover {
+  color: #212529;
+  background-color: #e2e6ea;
+  border-color: #dae0e5;
+}
+.reset:focus {
+  box-shadow: 0 0 0 4px rgba(248, 248, 248, 0.5);
+}
+
 /*基本表格样式*/
 .table {
 	width: 100%;
 	max-width: 100%;
 	border-collapse: collapse;
+
 }
 .table thead {
-	background-color: #ececec;
+	background-color: #fafafa;
 }
 .table th,
 .table td {
 	text-align: left;
 	height: 50px;
 	padding-left: 15px;
+	font-size: 15px;
 	border-bottom: 1px solid #dee2e6;
 }
-.table tr:hover {
-	background-color: #e4e4e4;
+.table td {
+	font-size: 14px;
+	color: #656565;
+}
+.table tbody tr:hover {
+	background-color: #EBEDFE;
 	cursor: pointer;
 }
 /*小图标基本样式*/
