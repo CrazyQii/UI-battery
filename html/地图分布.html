@@ -1,121 +1,156 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>地图分布</title>
-	<link rel="stylesheet" type="text/css" href="../css/base.css">
-	<link rel="stylesheet" href="../css/地图分布.css">
+    <meta charset="UTF-8">
+    <title>地图分布</title>
+    <link rel="stylesheet" type="text/css" href="../css/base.css">
+    <link rel="stylesheet" type="text/css" href="../css/地图分布.css">
+    <script type="text/javascript" src="../js/base.js"></script>
 </head>
+
 <body>
-	<div class="main">
-		<aside>
-			<div class="fix">
-				<div class="logo">
-					<img src="../images/logo.png" alt="Logo">
-					<div class="name">电量监控</div>
-				</div><!-- 图标 -->
-				<ul class="list">
-					<a href="#" >
-						<li>
-						<i class="icon i-battery"></i>
-						<span class="list-direct">电量监控</span>
-						<i class="icon i-right i-right-top"></i></li>
-					</a>
-					<a href="#" >
-						<li>
-						<span class="list-direct">子目录</span>
-						</li>
-					</a>
-					<a href="#" >
-						<li>
-						<span class="list-direct">子目录</span>
-						</li>
-					</a>
-					<a href="#" >
-						<li>
-						<i class="icon i-map"></i>
-						<span class="list-direct">地图分布</span>
-						<i class="icon i-right i-right-bottom"></i></li>
-					</a>
-					<a href="#" >
-						<li>
-						<i class="icon i-car"></i>
-						<span class="list-direct">车辆监控</span>
-						<i class="icon i-right i-right-bottom"></i></li>
-					</a>
-					<a href="#" >
-						<li>
-						<i class="icon i-compute"></i>
-						<span class="list-direct">统计分析</span>
-						<i class="icon i-right i-right-bottom"></i></li>
-					</a>
-				</ul><!-- 列表信息 -->
-			</div>
-		</aside><!-- 侧边栏 -->
+    <div class="main">
+        <aside id="menu">
+            <div class="fix">
+                <div class="logo">
+                    <img src="../images/logo.png" alt="Logo">
+                    <div class="name">电量监控</div>
+                </div>
+                <!-- 图标 -->
+                <ul class="list">
+                    <li href="javascript:;" onclick="getList(index)">
+                        <a>
+                            <i class="icon i-battery"></i>
+                            <span class="list-direct">电量监控</span>
+                            <i class="icon i-right i-right-bottom"></i>
+                        </a>
+                        <li id="index">
+                            <a href="../html/首页.html">
+                                <span class="list-direct">首页</span>
+                            </a>
+                            <a href="../html/低电量车列表.html">
+                                <span class="list-direct">低电量监控</span>
+                            </a>
+                        </li>
+                    </li>
+                    <li href="javascript:;" onclick="getList(map)">
+                        <a>
+                            <i class="icon i-map"></i>
+                            <span class="list-direct">地图分布</span>
+                            <i class="icon i-right i-right-bottom"></i>
+                        </a>
+                        <li id="map">
+                            <a href="../html/地图分布.html">
+                                <span class="list-direct checked">地图</span>
+                            </a>
+                        </li>
+                    </li>
+                    <li href="javascript:;" onclick="getList(car_list)">
+                        <a>
+                            <i class="icon i-car"></i>
+                            <span class="list-direct">车辆监控</span>
+                            <i class="icon i-right i-right-bottom"></i>
+                        </a>
+                        <li id="car_list">
+                            <a href="../html/车辆列表.html">
+                                <span class="list-direct">车辆列表</span>
+                            </a>
+                            <a href="../html/车辆详情.html">
+                                <span class="list-direct">车辆详情</span>
+                            </a>
+                        </li>
+                    </li>
+                    <li href="javascript:;" onclick="getList(downLoad)">
+                        <a>
+                            <i class="icon i-compute"></i>
+                            <span class="list-direct">统计分析</span>
+                            <i class="icon i-right i-right-bottom"></i>
+                        </a>
+                        <li id="downLoad">
+                            <a href="../html/报表下载.html">
+                                <span class="list-direct">报表下载</span>
+                            </a>
+                        </li>
+                    </li>
+                </ul>
+                <!-- 列表信息 -->
+            </div>
+        </aside>
+        <!-- 侧边栏 -->
 
-		<div class="info">
-			<header class="head">
-				<a href="#">
-					<i class="ban-icon"></i>
-				</a>
-				<div class="personal">
-					<a href="#">
-						<i class="sculpture"></i>
-						<span class="nickname">小脑斧</span>
-					</a>
-				</div><!-- 个人信息 --> 
-			</header><!-- 头部 -->
+        <div class="info" id="detailInfo">
+            <header class="head">
+                <a href="javascript:;" onclick="getList(menu)">
+                    <i class="ban-icon"></i>
+                </a>
+                <div class="personal">
+                    <a href="#">
+                        <i class="sculpture"></i>
+                        <span class="nickname">小脑斧</span>
+                    </a>
+                </div>
+                <!-- 个人信息 -->
+            </header>
+            <!-- 头部 -->
 
-			<div class="map-container">
-				<div class="map">
-					<h3>地图分布</h3>
-					<div class="search">
-						<input type="text" class="input firm" placeholder="全部公司"><i class="icon i-firm"></i>
-						<input type="text" placeholder="输入车辆自编号精准查询">
-					</div><!--地图分布-->
+            <div class="map-container">
+                <div class="map">
+                    <h3>地图分布</h3>
+                    <div class="search">
+                        <input type="text" class="input firm" placeholder="全部公司"><i class="icon i-firm"></i>
+                        <input type="text" placeholder="输入车辆自编号精准查询">
+                    </div>
+                    <!--地图分布-->
 
-					<div class="detail">
-						<div class="today-meter">
-							<div>今日里程数</div>
-							<h2>2342公里</h2>
-						</div><!--今日里程数标题-->
+                    <div class="detail">
+                        <div class="today-meter">
+                            <div>今日里程数</div>
+                            <h2>2342公里</h2>
+                        </div>
+                        <!--今日里程数标题-->
 
-						<div class="cars-num">
-							<ul>
-								<li>
-									<span><i class="icon i-all-car"></i>在线车辆</span>
-									<span class="cars">1000辆</span>
-							    </li>
-								<li>
-									<span><i class="icon i-top-car"></i>电量充足</span>
-									<span class="persent">| 64%</span>
-									<span class="cars">1000辆</span>
-								</li>
-								<li>
-									<span><i class="icon i-middle-car"></i>电量较足</span> 
-									<span class="persent">| 64%</span>
-									<span class="cars">1000辆</span>
-								</li>
-								<li>
-									<span><i class="icon i-low-car"></i>电量过低</span> 
-									<span class="persent">| 64%</span>
-									<span class="cars">1000辆</span>
-								</li>
-							</ul>
-						</div><!--具体汽车数量-->
-					</div><!--今日里程数-->
-				</div>
+                        <div class="cars-num">
+                            <ul>
+                                <li>
+                                    <span><i class="icon i-all-car"></i>在线车辆</span>
+                                    <span class="cars">1000辆</span>
+                                </li>
+                                <li>
+                                    <span><i class="icon i-top-car"></i>电量充足</span>
+                                    <span class="persent">| 64%</span>
+                                    <span class="cars">1000辆</span>
+                                </li>
+                                <li>
+                                    <span><i class="icon i-middle-car"></i>电量较足</span>
+                                    <span class="persent">| 64%</span>
+                                    <span class="cars">1000辆</span>
+                                </li>
+                                <li>
+                                    <span><i class="icon i-low-car"></i>电量过低</span>
+                                    <span class="persent">| 64%</span>
+                                    <span class="cars">1000辆</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <!--具体汽车数量-->
+                    </div>
+                    <!--今日里程数-->
+                </div>
 
-				<footer>
-				<ul class="help">
-					<li><a href="#">帮助</a></li>
-					<li><a href="#">隐私</a></li>
-					<li><a href="#">条款</a></li>
-				</ul><br>
-				<p>Copyright @ 2018 公交云体验技术部出品</p>
-			</footer><!--底部说明-->
-			</div><!--地图分布区-->
-		</div>
-	</div>
+                <footer>
+                    <ul class="help">
+                        <li><a href="#">帮助</a></li>
+                        <li><a href="#">隐私</a></li>
+                        <li><a href="#">条款</a></li>
+                    </ul><br>
+                    <p>Copyright @ 2018 公交云体验技术部出品</p>
+                </footer>
+                <!--底部说明-->
+            </div>
+            <!--地图分布区-->
+        </div>
+    </div>
 </body>
+
 </html>

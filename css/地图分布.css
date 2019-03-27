@@ -1,89 +1,112 @@
 /*地图*/
+
 .map-container {
-	width: 100%;
-	height: 100%;
-	padding: 25px 30px;
-	box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 25px 30px;
+    box-sizing: border-box;
 }
+
 .map {
-	width: 100%;
-	height: 100%;
-	padding: 20px;
-	background: url(../images/交通地图.jpg) no-repeat;
-	box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    background: url(../images/交通地图.jpg) no-repeat;
+    background-size: 100%;
+    box-sizing: border-box;
 }
+
 
 /*地图分布*/
+
 h3 {
-	display: inline-block;
+    display: inline-block;
+    color: #000;
 }
+
 .search {
-	position: relative;
-	display: inline-block;
-	height: 35px;
-	margin-left: 40px;
+    position: relative;
+    display: inline-block;
+    height: 35px;
+    margin-left: 40px;
 }
+
 .search .firm {
-	width: 120px;
+    width: 120px;
 }
+
 .i-firm {
-	position: absolute;
-	top: 50%;
-	left: 95px;
-	margin-top: -9px;
-	background: url(../images/向下箭头.png) no-repeat;
+    position: absolute;
+    top: 50%;
+    left: 95px;
+    margin-top: -9px;
+    background: url(../images/向下箭头.png) no-repeat;
 }
+
 
 /*今日里程数*/
+
 .detail {
-	width: 235px;
-	height: 250px;
-	margin-top: 20px;
-	background-color: #fff;
-}
-.today-meter {
-	width: inherit;
-	height: 80px;
-	padding: 20px;
-	border-bottom: 1px solid #eee;
-	box-sizing: border-box;
-}
-.today-meter div {
-	font-size: 14px;
-	color: #767676;
-}
-.today-meter h2 {
-	margin-top: 5px;
-	font-size: 22px;
-	font-weight: 500;
-}
-.cars-num {
-	padding: 10px;
-	color: #767676;
-}
-.cars-num li{
-	width: 100%;
-	height: 35px;
-	line-height: 35px;
-}
-.persent {
-	font-size: 14px;
-	color: #BCBCBC;
-}
-.cars {
-	float: right;
+    width: 235px;
+    height: 250px;
+    margin-top: 20px;
+    background-color: #fff;
 }
 
+.today-meter {
+    width: inherit;
+    height: 80px;
+    padding: 20px;
+    border-bottom: 1px solid #eee;
+    box-sizing: border-box;
+}
+
+.today-meter div {
+    font-size: 14px;
+    color: #767676;
+}
+
+.today-meter h2 {
+    margin-top: 5px;
+    font-size: 22px;
+    font-weight: 500;
+}
+
+.cars-num {
+    padding: 10px;
+    color: #767676;
+}
+
+.cars-num li {
+    width: 100%;
+    height: 35px;
+    line-height: 35px;
+}
+
+.persent {
+    font-size: 14px;
+    color: #BCBCBC;
+}
+
+.cars {
+    float: right;
+}
+
+
 /*电量小图标*/
+
 .i-all-car {
-	background: url(../images/公交车.png) no-repeat;
+    background: url(../images/公交车.png) no-repeat;
 }
+
 .i-top-car {
-	background: url(../images/公交车.png) no-repeat;
+    background: url(../images/公交车.png) no-repeat;
 }
+
 .i-middle-car {
-	background: url(../images/公交车-黄色.png) no-repeat;
+    background: url(../images/公交车-黄色.png) no-repeat;
 }
+
 .i-low-car {
-	background: url(../images/公交车-红色.png) no-repeat;
+    background: url(../images/公交车-红色.png) no-repeat;
 }
