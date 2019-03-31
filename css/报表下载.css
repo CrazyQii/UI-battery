@@ -22,6 +22,7 @@
     margin-left: -5px;
     border: 1px solid #d9d9d9;
     border-radius: 2px;
+    color: #000;
     background-color: #fff;
 }
 
@@ -41,4 +42,8 @@
 .download a {
     display: inline-block;
     color: #3da2ff;
+}
+
+.download a:hover {
+    text-decoration: underline;
 }

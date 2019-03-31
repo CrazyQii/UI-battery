@@ -7,6 +7,8 @@
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/报表下载.css">
     <script type="text/javascript" src="../js/base.js"></script>
+    <script type="text/javascript" src="../js/报表下载.js"></script>
+
 </head>
 
 <body>
@@ -101,10 +103,10 @@
             <!--报表下载-->
 
             <div class="report">
-                <div class="select">
-                    <button class="style">日报</button>
-                    <button class="style">月报</button>
-                    <button class="style">年报</button>
+                <div class="select" id="reportTime">
+                    <button type="button" class="style" onclick="getReport(this, day)">日报</button>
+                    <button type="button" class="style" onclick="getReport(this, month)">月报</button>
+                    <button type="button" class="style" onclick="getReport(this, year)">年报</button>
                 </div>
                 <!--选择报告按钮-->
 
@@ -116,26 +118,7 @@
                             <th width="35%">下载</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td>日报</td>
-                            <td>2018/10/1</td>
-                            <td class="download">
-                                <ul>
-                                    <a href="#">
-                                        <li>车辆报表</li>
-                                    </a>
-                                    |
-                                    <a href="#">
-                                        <li>车型报表</li>
-                                    </a>
-                                    |
-                                    <a href="#">
-                                        <li>车辆&车型报表</li>
-                                    </a>
-                                </ul>
-                            </td>
-                        </tr>
+                    <tbody id="day">
                         <tr>
                             <td>日报</td>
                             <td>2018/10/1</td>
@@ -270,10 +253,410 @@
                             </td>
                         </tr>
                     </tbody>
+                    <!-- 日报 -->
+                    <tbody id="month">
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/8/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/8/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/8/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/8/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/8/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/4/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/5/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>月报</td>
+                            <td>2018/6/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!-- 月报 -->
+                    <tbody id="year">
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>年报</td>
+                            <td>2017/10/1</td>
+                            <td class="download">
+                                <ul>
+                                    <a href="#">
+                                        <li>车辆报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车型报表</li>
+                                    </a>
+                                    |
+                                    <a href="#">
+                                        <li>车辆&车型报表</li>
+                                    </a>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <!--表格信息-->
                 </table>
-                <!--表格信息-->
 
-                <div class="change-page">
+                <div class="change-page" id="changeDay">
+                    <ul>
+                        <a href="#">
+                            <li><i class="icon left"></i></li>
+                        </a>
+                        <a href="#">
+                            <li>1</li>
+                        </a>
+                        <a href="#">
+                            <li>2</li>
+                        </a>
+                        <a href="#">
+                            <li>3</li>
+                        </a>
+                        <a href="#">
+                            <li>4</li>
+                        </a>
+                        <a href="#">
+                            <li>5</li>
+                        </a>
+                        <a href="#">
+                            <li>6</li>
+                        </a>
+                        <a href="#">
+                            <li>7</li>
+                        </a>
+                        <a href="#">
+                            <li>8</li>
+                        </a>
+                        <a href="#">
+                            <li>9</li>
+                        </a>
+                        <a href="#">
+                            <li><i class="icon right"></i></li>
+                        </a>
+                        <a href="#" class="all">
+                            <li>
+                                <p>10条/页<i class="icon i-right-bottom"></i>
+                                </p>
+                            </li>
+                        </a>
+                    </ul>
+                    <label class="tar-page">跳至<input type="text" name="pages" value="5">页</label>
+                </div>
+
+                <div class="change-page" id="changeMonth">
+                    <ul>
+                        <a href="#">
+                            <li><i class="icon left"></i></li>
+                        </a>
+                        <a href="#">
+                            <li>1</li>
+                        </a>
+                        <a href="#">
+                            <li>2</li>
+                        </a>
+                        <a href="#">
+                            <li>3</li>
+                        </a>
+                        <a href="#">
+                            <li>4</li>
+                        </a>
+                        <a href="#">
+                            <li>5</li>
+                        </a>
+                        <a href="#">
+                            <li>6</li>
+                        </a>
+                        <a href="#">
+                            <li>7</li>
+                        </a>
+                        <a href="#">
+                            <li>8</li>
+                        </a>
+                        <a href="#">
+                            <li>9</li>
+                        </a>
+                        <a href="#">
+                            <li><i class="icon right"></i></li>
+                        </a>
+                        <a href="#" class="all">
+                            <li>
+                                <p>10条/页<i class="icon i-right-bottom"></i>
+                                </p>
+                            </li>
+                        </a>
+                    </ul>
+                    <label class="tar-page">跳至<input type="text" name="pages" value="5">页</label>
+                </div>
+
+                <div class="change-page" id="changeYear">
                     <ul>
                         <a href="#">
                             <li><i class="icon left"></i></li>
