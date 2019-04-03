@@ -1,13 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
 
 <head>
-    <meta charset="UTF-8">
-    <title>地图分布</title>
-    <link rel="stylesheet" type="text/css" href="../css/base.css">
-    <link rel="stylesheet" type="text/css" href="../css/地图分布.css">
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+    <title>map地图</title>
+    <link rel="stylesheet" href="../css/map.css">
+    <link rel="stylesheet" href="../css/base.css">
     <script type="text/javascript" src="../js/base.js"></script>
-    <script type="text/javascript" src="../js/地图分布.js"></script>
+    <!--引用百度地图API-->
+    <script type="text/javascript" src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+
 </head>
 
 <body>
@@ -35,13 +37,13 @@
                             </a>
                         </li>
                     </li>
-                    <li href="javascript:;" onclick="getList(map)">
+                    <li href="javascript:;" onclick="getList(navMap)">
                         <a>
                             <i class="icon i-map"></i>
                             <span class="list-direct">地图分布</span>
                             <i class="icon i-right i-right-bottom"></i>
                         </a>
-                        <li id="map">
+                        <li id="navMap">
                             <a href="../html/地图分布.html">
                                 <span class="list-direct checked">地图</span>
                             </a>
@@ -97,49 +99,50 @@
 
             <div class="map-container">
                 <div class="map">
-                    <h3>地图分布</h3>
-                    <div class="search">
-                        <input type="text" class="input firm" placeholder="全部公司"><i class="icon i-firm"></i>
-                        <input type="text" placeholder="输入车辆自编号精准查询">
-                    </div>
-                    <!--地图分布-->
-
-                    <div class="detail">
-                        <div class="today-meter">
-                            <div>今日里程数</div>
-                            <h2>2342公里</h2>
+                    <!--百度地图容器-->
+                    <div style="width:100%;height:100%;border:#ccc solid 1px;" id="dituContent"></div>
+                    <div class="mapInfo">
+                        <h3>地图分布</h3>
+                        <div class="search">
+                            <input type="text" class="input firm" placeholder="全部公司"><i class="icon i-firm"></i>
+                            <input type="text" placeholder="输入车辆自编号精准查询">
                         </div>
-                        <!--今日里程数标题-->
+                        <!--地图分布-->
 
-                        <div class="cars-num">
-                            <ul>
-                                <li>
-                                    <span><i class="icon i-all-car"></i>在线车辆</span>
-                                    <span class="cars">1000辆</span>
-                                </li>
-                                <li>
-                                    <span><i class="icon i-top-car"></i>电量充足</span>
-                                    <span class="persent">| 64%</span>
-                                    <span class="cars">1000辆</span>
-                                </li>
-                                <li>
-                                    <span><i class="icon i-middle-car"></i>电量较足</span>
-                                    <span class="persent">| 64%</span>
-                                    <span class="cars">1000辆</span>
-                                </li>
-                                <li>
-                                    <span><i class="icon i-low-car"></i>电量过低</span>
-                                    <span class="persent">| 64%</span>
-                                    <span class="cars">1000辆</span>
-                                </li>
-                            </ul>
+                        <div class="detail">
+                            <div class="today-meter">
+                                <div>今日里程数</div>
+                                <h2>2342公里</h2>
+                            </div>
+                            <!--今日里程数标题-->
+
+                            <div class="cars-num">
+                                <ul>
+                                    <li>
+                                        <span><i class="icon i-all-car"></i>在线车辆</span>
+                                        <span class="cars">1000辆</span>
+                                    </li>
+                                    <li>
+                                        <span><i class="icon i-top-car"></i>电量充足</span>
+                                        <span class="persent">| 64%</span>
+                                        <span class="cars">1000辆</span>
+                                    </li>
+                                    <li>
+                                        <span><i class="icon i-middle-car"></i>电量较足</span>
+                                        <span class="persent">| 64%</span>
+                                        <span class="cars">1000辆</span>
+                                    </li>
+                                    <li>
+                                        <span><i class="icon i-low-car"></i>电量过低</span>
+                                        <span class="persent">| 64%</span>
+                                        <span class="cars">1000辆</span>
+                                    </li>
+                                </ul>
+                            </div>
+                            <!--具体汽车数量-->
                         </div>
-                        <!--具体汽车数量-->
+                        <!--今日里程数-->
                     </div>
-                    <!--今日里程数-->
-                </div>
-
-                <div id="allcars">
                 </div>
 
                 <footer>
@@ -156,5 +159,7 @@
         </div>
     </div>
 </body>
+
+<script type="text/javascript" src="../js/map.js"></script>
 
 </html>

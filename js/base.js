@@ -6,7 +6,7 @@ window.onload = function() {
     //初始化子目录隐藏,所有页面侧边栏
     index.style.display = "none";
     downLoad.style.display = "none";
-    map.style.display = "none";
+    navMap.style.display = "none";
     car_list.style.display = "none";
 
     /*
@@ -35,6 +35,16 @@ window.onload = function() {
     change_day.style.display = "block";
     change_month.style.display = "none";
     change_year.style.display = "none";
+
+    /**
+     * 地图分布
+     */
+    //添加公交车
+    var allcars = document.getElementById('allcars');
+    for (let i = 0; i < 50; i++) {
+        var oimg = document.createElement('img');
+        allcars.appendChild(oimg);
+    }
 }
 
 
