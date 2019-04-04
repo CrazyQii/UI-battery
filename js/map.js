@@ -38,38 +38,47 @@ function addMapControl() {
     map.addControl(ctrl_ove);
 }
 
-function setMarker(points, opts) {
+//设置标点标记
+function setMarker(points) {
     for (let i = 0; i < points.length; i++) {
         //设置图标
         var myIcon = new BMap.Icon("../images/公交车.png", new BMap.Size(15, 15), {
-            //图片中央下端尖角位置
-            offset: new BMap.Size(10, -5)
+            offset: new BMap.Size(10, -5) //图片中央下端尖角位置
         });
-        var point = new BMap.Point(points[i][0], points[i][1]);
+        var point = new BMap.Point(points[i][0], points[i][1]); //获取公交车经纬度坐标
         var marker = new BMap.Marker(point, { icon: myIcon }); //创建标注
-        map.addOverlay(marker);
+        map.addOverlay(marker); //添加标注
 
-        var opts = {
-            width: 200,
-            height: 100,
-            title: "<b>车辆信息</b>"
-        };
-        var infoindows = new BMap.InfoWindow("启用时间：", opts);
-        marker.addEventListener("click", function() {
-            map.openInfoWindow(infoindows, point);
+
+        marker.addEventListener("click", function() { //添加监听事件
+            var opts = { //创建公交车信息框
+                width: 250,
+                height: 150,
+                title: "<h3>浙A 88888</h3>"
+            };
+            var sContent = //设置公交车详细信息
+                "<hr> <div style='width: 100%; height: 100%;  font-size: 14px; color: #555'>" +
+                "<p style='margin-top: 8px;'> 启用时间: <span> 2018-09-20 </span> </p>" +
+                "<p style='margin-top: 8px;'> 车辆自编号: <span> 2-7777 </span></p>" +
+                "<p style='margin-top: 8px;'><span> 归属线路: <span> 1路</span> </span>" +
+                "<span style='margin-left: 60px;'> 剩余电量: <span> 30% </span> </span></p>" +
+                "<p style='margin-top: 8px;'><span> 理论续航: <span> 78公里 </span></span>" +
+                "<span style='margin-left: 43px;'> 速度: <span>20KM/h</span> </span></p> </div>";
+            var infoindows = new BMap.InfoWindow(sContent, opts); //初始化信息框
+            this.openInfoWindow(infoindows); //点击跳出信息框
         });
-    }
 
+    }
 }
 
 //设置公交车经纬度
 var points = [
     [120.353563, 30.314966],
-    [120.354474, 30.314446],
-    [120.354435, 30.314446],
-    [120.354450, 30.316464],
+    [120.354474, 30.317446],
+    [120.354435, 30.314046],
+    [120.354450, 30.314464],
     [120.375693, 30.316460],
-    [120.375633, 30.315440],
+    [120.345633, 30.315440],
     [120.375669, 30.310450],
     [120.375649, 30.352480],
     [120.373569, 30.354980],
@@ -79,11 +88,11 @@ var points = [
     [120.352651, 30.324895],
     [120.35549, 30.307234],
     [120.364581, 30.31601],
-    [120.364617, 30.31548],
+    [120.324617, 30.31548],
     [120.361041, 30.310772],
     [120.364455, 30.317896],
     [120.364742, 30.312986],
-    [120.364419, 30.316977],
+    [120.364019, 30.316977],
     [120.354843, 30.32184],
     [120.36079, 30.315885],
     [120.348807, 30.324833],
@@ -95,12 +104,14 @@ var points = [
     [120.353352, 30.312207],
     [120.355328, 30.308902],
     [120.359748, 30.312612],
-    [120.35001, 30.312004]
+    [120.35001, 30.312004],
+    [120.344884, 30.314507],
+    [120.347992, 30.315738],
+    [120.352573, 30.312138],
+    [120.349752, 30.312823],
+    [120.35001, 30.312004],
+    [120.350058, 30.309503],
+    [120.344614, 30.312855]
 ];
 
-var busInfo = [{
-    width: 200,
-    height: 100,
-    title: "<b>车辆信息</b>"
-}];
-initMap(); //创建和初始化地图
+initMap(); //创建和初始化地图yy

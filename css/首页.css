@@ -1,48 +1,86 @@
 /*三个标签*/
+
 .tags {
-	display: flex;
-	flex-direction: row;
-	justify-content: flex-start;
-	width: 95%;
-	height: 100px;
-	margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 95%;
+    height: 100px;
+    margin: 20px;
 }
+
 .tag {
-	width: 250px;
-	height: 100%;
-	margin-right: 20px;
-	padding: 15px;
-	font-size: 16px;
-	font-family: 'Microsoft YaHei';
-	line-height: 30px;
-	color: #b5b5b5;
-	background-color: #fff;
-	box-sizing: border-box;
+    position: relative;
+    width: 250px;
+    height: 100%;
+    margin-right: 20px;
+    padding: 15px;
+    font-size: 16px;
+    font-family: 'Microsoft YaHei';
+    line-height: 30px;
+    color: #b5b5b5;
+    background-color: #fff;
+    box-sizing: border-box;
 }
+
 .tag p {
-	font-size: 22px;
-	font-weight: 700;
-	color: #000;
+    font-size: 22px;
+    font-weight: 700;
+    color: #000;
 }
+
 .tag i {
-	float: right;
-	display: block;
-	width: 15px;
-	height: 15px;
-	margin-top: 8px;
-	background: url(../images/疑问.png) no-repeat;
+    float: right;
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin-top: 8px;
+    background: url(../images/疑问.png) no-repeat;
 }
+
+.windowShow {
+    display: none;
+}
+
+i:hover .windowShow {
+    display: block;
+    position: absolute;
+    right: -17px;
+    top: -20px;
+    width: 80px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 14px;
+    color: #fff;
+    background-color: #000;
+}
+
+
+/* 三角形 */
+
+.windowShow div {
+    position: absolute;
+    right: 33px;
+    top: 30px;
+    height: 0px;
+    width: 0px;
+    border-width: 7px 7px 7px 7px;
+    border-style: solid;
+    border-color: #000 transparent transparent;
+}
+
 
 /*详细信息*/
+
 .detail {
-	width: 95%;
-	height: 80%;
-	margin-left: 20px;
-	padding: 30px;
-	font-size: 14px;
-	font-family: 'Mirosoft YaHei';
-	background-color: #fff;
-	box-sizing: border-box;
+    width: 95%;
+    height: 80%;
+    margin-left: 20px;
+    padding: 30px;
+    font-size: 14px;
+    font-family: 'Mirosoft YaHei';
+    background-color: #fff;
+    box-sizing: border-box;
 }
-
-

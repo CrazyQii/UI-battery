@@ -1,6 +1,7 @@
 /*地图*/
 
 .map-container {
+    position: relative;
     width: 100%;
     height: 100%;
     padding: 25px 30px;
@@ -80,6 +81,9 @@ h3 {
 /*今日里程数*/
 
 .detail {
+    position: absolute;
+    top: 100px;
+    left: 70px;
     width: 235px;
     height: 250px;
     margin-top: 20px;
