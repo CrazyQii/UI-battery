@@ -1,5 +1,5 @@
 //获取报表按钮元素
-function getReport(ele, time) {
+function getReport(ele) {
     var nowButton = document.getElementById(ele.id);
     //获取按钮的所有兄弟元素
     var p = ele.parentNode.children;
@@ -17,22 +17,14 @@ function getReport(ele, time) {
         document.getElementById('day').style.display = "table-row-group";
         document.getElementById('month').style.display = "none";
         document.getElementById('year').style.display = "none";
-        document.getElementById('changeDay').style.display = "block";
-        document.getElementById('changeMonth').style.display = "none";
-        document.getElementById('changeYear').style.display = "none";
+
     } else if (nowButton.id == "button1") { //显示月报，隐藏年报和日报
         document.getElementById('day').style.display = "none";
         document.getElementById('month').style.display = "table-row-group";
         document.getElementById('year').style.display = "none";
-        document.getElementById('changeDay').style.display = "none";
-        document.getElementById('changeMonth').style.display = "block";
-        document.getElementById('changeYear').style.display = "none";
     } else if (nowButton.id == "button2") { //显示年报，隐藏日报和月报
         document.getElementById('day').style.display = "none";
         document.getElementById('month').style.display = "none";
         document.getElementById('year').style.display = "table-row-group";
-        document.getElementById('changeDay').style.display = "none";
-        document.getElementById('changeMonth').style.display = "none";
-        document.getElementById('changeYear').style.display = "block";
     }
 }

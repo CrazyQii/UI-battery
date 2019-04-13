@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>低电量车列表</title>
+    <link rel="shortcut icon" href="../bitbug_favicon.ico">
     <link rel="stylesheet" type="text/css" href="../css/base.css">
     <link rel="stylesheet" type="text/css" href="../css/低电量车列表.css">
     <script type="text/javascript" src="../js/base.js"></script>
@@ -101,7 +102,15 @@
                 <div class="search-top">
                     <span>公司:</span>
                     <span>
-						<input type="text" name="input" placeholder="请选择公司"><i class="icon ser"></i>
+                        <input type="text" name="input" placeholder="请选择公司" list="confirms">
+                        <datalist id="confirms">
+                            <option value="第一分公司"></option>
+                            <option value="第二分公司"></option>
+                            <option value="第三分公司"></option>
+                            <option value="第四分公司"></option>
+                            <option value="第五分公司"></option>
+                            <option value="第六分公司"></option>
+                        </datalist>
 					</span>
                     <button type="button" class="consult">查询</button>
                     <button type="button" class="reset">重置</button>

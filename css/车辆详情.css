@@ -1,49 +1,70 @@
 /*车辆信息*/
+
 .detail {
-	width: 95%;
-	height: 95%;
-	margin: 20px 25px;
-	padding: 30px;
-	background-color: #fff;
-	box-sizing: border-box;
+    width: 95%;
+    height: 95%;
+    margin: 20px 25px;
+    padding: 30px;
+    background-color: #fff;
+    box-sizing: border-box;
 }
+
 .car-table {
-	width: 100%;
-	max-width: 100%;
-	border-collapse: collapse;
-	border-bottom: 1px solid #C0C0C0;
+    width: 100%;
+    max-width: 100%;
+    border-collapse: collapse;
+    border-bottom: 1px solid #C0C0C0;
 }
-.car-table thead td{
-	font-size: 16px;
-	font-weight: 700;
-	color: #000;
+
+.car-table thead td {
+    font-size: 16px;
+    font-weight: 700;
+    color: #000;
 }
+
 .car-table th,
 .car-table td {
-	text-align: left;
-	padding-left: 15px;
-	padding-bottom: 20px;
-	color: #1b1b1b;
+    text-align: left;
+    padding-left: 15px;
+    padding-bottom: 20px;
+    color: #1b1b1b;
 }
+
 .car-table td span {
-	color: #656565;
+    color: #656565;
 }
+
 .battery-record {
-	margin: 35px 0  35px 0;
+    margin: 35px 0 35px 0;
 }
+
 .search {
-	margin-top: 20px;
-	margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .unfold {
-	margin-left: 20px;
+    margin-left: 20px;
 }
+
+
 /*时间输入框样式*/
-input[type=date]::-webkit-inner-spin-button{visibility: hidden;}
-input[type=date]::-webkit-datetime-edit-year-field{}
+
+input[type=date]::-webkit-inner-spin-button {
+    visibility: hidden;
+}
+
+input[type=date]::-webkit-datetime-edit-fields-wrapper {
+    font-weight: 700;
+}
+
+input[type=date] {
+    padding-right: 10px;
+}
+
 
 /*充电记录表格*/
+
 .table tbody {
-	color: #8C8C8C;
+    color: #8C8C8C;
 }

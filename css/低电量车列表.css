@@ -25,17 +25,8 @@
     box-sizing: border-box;
 }
 
-.ser {
-    position: absolute;
-    right: 15px;
-    top: 50%;
-    margin-top: -8px;
-    background: url(../images/向下箭头.png) no-repeat;
-}
-
-.ser:hover {
-    background: url(../images/箭头-蓝色.png) no-repeat;
-    cursor: pointer;
+input[list=confirms] {
+    padding-right: 10px;
 }
 
 .unfold i {
