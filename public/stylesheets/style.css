@@ -1,0 +1,301 @@
+.right {
+    float: right;
+}
+
+.left {
+    float: left;
+}
+
+#container {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    min-width: 900px;
+    height: 900px;
+    background-color: #f0f2f5;
+}
+
+
+/* 侧边栏 */
+
+aside {
+    padding-top: 20px;
+    width: 20%;
+    min-width: 200px;
+    height: 100%;
+    background-color: #001629;
+    box-sizing: border-box;
+}
+
+
+/* 侧边栏--Logo */
+
+#logo {
+    padding-left: 25px;
+    min-width: 150px;
+    height: 50px;
+}
+
+#logo img {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+
+/* 侧边栏--网站名 */
+
+#brand {
+    display: inline-block;
+    margin-left: 10px;
+    height: 25px;
+    vertical-align: middle;
+    line-height: 25px;
+    font-size: 18px;
+    color: #fafafa;
+}
+
+
+/* 侧边栏--第一级菜单 */
+
+#aside-parent-item li {
+    width: 100%;
+    line-height: 40px;
+}
+
+.items {
+    padding: 0 25px;
+    width: 100%;
+    height: 100%;
+}
+
+.aside-child-items li:hover,
+.items:hover {
+    box-shadow: 0px 6px 6px #000;
+    background-color: #1890ff;
+    cursor: pointer;
+}
+
+.aside-child-items li:hover a,
+.items:hover a {
+    text-decoration: none;
+    color: #fafafa;
+}
+
+.item-title {
+    margin-left: 10px;
+    color: #9099a1;
+}
+
+
+/* 侧边栏--第一级菜单--小图标 */
+
+.i-right {
+    float: right;
+    margin-top: 15px;
+}
+
+
+/* 侧边栏--第二级菜单 */
+
+.aside-child-items {
+    display: none;
+    width: 100%;
+}
+
+.aside-child-items li {
+    padding: 0 40px;
+    font-size: 14px;
+}
+
+.current {
+    color: #fafafa;
+}
+
+
+/* 列表页导航栏 */
+
+.current-page {
+    padding: 15px 40px;
+    width: 100%;
+    box-shadow: 0 2px 2px #c6c6c6 inset;
+    background-color: #fff;
+}
+
+.current-page h3 {
+    font-size: 20px;
+    font-weight: 700;
+}
+
+.current-page p {
+    color: #838383;
+}
+
+
+/* 列表页详细信息 */
+
+.content {
+    width: 95%;
+    height: 95%;
+    margin: 20px 25px;
+    padding: 30px;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+/* 头部 */
+
+#container>article {
+    left: 20%;
+    width: 100%;
+    min-width: 200px;
+}
+
+#header {
+    height: 65px;
+    box-shadow: 0px 4px 4px #e1e3e6;
+    background-color: #fff;
+    box-sizing: border-box;
+}
+
+.ban-icon {
+    float: left;
+    display: block;
+    width: 20px;
+    height: 20px;
+    margin-top: 20px;
+    margin-left: 25px;
+    background: url(../images/栏目.png) no-repeat;
+}
+
+.user-info {
+    float: right;
+    width: 150px;
+    height: 100%;
+    padding-top: 15px;
+    padding-left: 35px;
+    background-color: #fafafa;
+    box-sizing: border-box;
+}
+
+.sculpture {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    vertical-align: middle;
+    background: url(../images/sculpture.png) no-repeat;
+}
+
+#nickname {
+    display: inline-block;
+    height: 25px;
+    margin-left: 10px;
+    line-height: 25px;
+    color: #000;
+}
+
+
+/* icon图标 */
+
+.icon {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    vertical-align: middle;
+}
+
+.i-battery {
+    background: url(../images/电灯.png) no-repeat;
+}
+
+.items:hover .i-battery {
+    background: url(../images/电灯-点击.png) no-repeat;
+}
+
+.i-map {
+    background: url(../images/地图.png) no-repeat;
+}
+
+.items:hover .i-map {
+    background: url(../images/地图-点击.png) no-repeat;
+}
+
+.i-car {
+    background: url(../images/图标_报警灯.png) no-repeat;
+}
+
+.items:hover .i-car {
+    background: url(../images/图标_报警灯-点击.png) no-repeat;
+}
+
+.i-compute {
+    background: url(../images/统计分析.png) no-repeat;
+}
+
+.items:hover .i-compute {
+    background: url(../images/统计分析点击.png) no-repeat;
+}
+
+.i-top {
+    background: url(../images/向上箭头.png) no-repeat;
+}
+
+.items:hover .i-top {
+    background: url(../images/向上点击.png) no-repeat;
+}
+
+.i-bottom {
+    background: url(../images/向下箭头.png) no-repeat;
+}
+
+.items:hover .i-bottom {
+    background: url(../images/向下点击.png) no-repeat;
+}
+
+
+/* 跳转导航 */
+
+.left {
+    background: url(../images/箭头-左.png) no-repeat;
+}
+
+a:hover .left {
+    background: url(../images/箭头-左-点击.png) no-repeat;
+}
+
+.right {
+    background: url(../images/箭头-右.png) no-repeat;
+}
+
+a:hover .right {
+    background: url(../images/箭头-右-点击.png) no-repeat;
+}
+
+.pagination li {
+    margin-right: 5px;
+}
+
+
+/*底部信息*/
+
+footer {
+    display: block;
+    width: 280px;
+    height: 60px;
+    margin: 50px auto;
+    font-size: 14px;
+    color: #b2b2b2;
+}
+
+.help li a {
+    float: left;
+    height: 35px;
+    margin-left: 50px;
+    line-height: 35px;
+    color: #b2b2b2;
+}
+
+.help li a:hover {
+    color: #FF0000;
+}

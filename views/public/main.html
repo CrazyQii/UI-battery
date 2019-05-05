@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{{ title }}</title>
+  <link rel="stylesheet" href="/stylesheets/style.css">
+  <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
+  {% block css %}
+  {% endblock %}
+</head>
+<body>
+	<div id="container">
+		<!-- 引入侧边栏页面 -->
+		{% include "./slider.html" %}
+
+		<!-- 右侧视图 -->
+		<article>
+			<!-- 引入头部 -->
+			{% include "./header.html" %}
+
+			<!-- 引入主体页面 -->
+			<article>
+				<!-- 导航栏 -->
+				{% block nav %}
+		  		{% endblock %}
+
+		  		<!-- 主要内容 -->
+		  		<div class="content">
+		  			{% block content %}
+		  			{% endblock %}
+
+		  			<!-- 跳转导航 -->
+		  			{% include "./navigator.html" %}
+		  		</div>
+			</article>
+		</article>
+  	</div>
+</body>
+	<script src="/javascripts/jquery.js"></script>
+	<script src="/javascripts/base.js"></script>
+</html>

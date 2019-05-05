@@ -1,0 +1,47 @@
+{% extends "../public/main.html" %}
+
+
+{% block nav %}
+<nav class="current-page">
+    <p>{{title}}</p>
+    <h3>{{title}}</h3>
+</nav>
+{% endblock %}
+
+{% block content %}
+<div class="btn-group">
+    <button type="button" class="btn btn-outline-primary btn-sm">日报</button>
+    <button type="button" class="btn btn-outline-primary btn-sm">月报</button>
+    <button type="button" class="btn btn-outline-primary btn-sm">年报</button>
+</div>
+<table class="mt-3 table table-hover row pl-4">
+    <thead class="thead-light w-100">
+        <tr class="row">
+            <th class="col-2">报表类型</th>
+            <th class="col-5">报表时间<i class="icon i-report"></i></th>
+            <th class="col-5">下载</th>
+        </tr>
+    </thead>
+    <tbody class="w-100">
+        <tr class="row">
+            <td class="col-2">日报</td>
+            <td class="col-5">2018/10/1</td>
+            <td class="col-5">
+                <ul class="list-unstyled row">
+                    <a href="#" class="col-3">
+                        <li>车辆报表</li>
+                    </a>
+                    |
+                    <a href="#" class="col-3">
+                        <li>车型报表</li>
+                    </a>
+                    |
+                    <a href="#" class="col-4">
+                        <li>车辆&车型报表</li>
+                    </a>
+                </ul>
+            </td>
+        </tr>
+    </tbody>
+</table>
+{% endblock %}

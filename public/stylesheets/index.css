@@ -58,7 +58,7 @@ i:hover .windowShow {
 }
 
 
-/* 三角形 */
+/* 三个标签--三角形 */
 
 .windowShow div {
     position: absolute;
@@ -72,11 +72,10 @@ i:hover .windowShow {
 }
 
 
-/*详细信息*/
+/* 表单内容 */
 
-.detail {
+.content {
     width: 95%;
-    height: 80%;
     margin-left: 20px;
     padding: 30px;
     font-size: 14px;

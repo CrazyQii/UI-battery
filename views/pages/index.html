@@ -1,0 +1,68 @@
+{% extends "../public/main-index.html" %}
+
+{% block css %}
+<link rel="stylesheet" href="/stylesheets/index.css">
+{% endblock %}
+
+{% block body %}
+  	<div class="tags">
+	    <div class="tag">电动车总数
+	        <a href="#">
+	            <i>
+	                <div class="windowShow">
+	                电动车说明
+	                <div></div>
+	                </div>
+	            </i>
+	        </a>
+	        <p>￥125,560 </p>
+	    </div>
+	    <div class="tag">出车总数
+	        <a href="#">
+	            <i>
+	                <div class="windowShow">
+	                出车数说明
+	                <div></div>
+	            </div>
+	            </i>
+	        </a>
+	        <p>8,846</p>
+	    </div>
+	    <div class="tag">监控车辆
+	        <a href="#">
+	            <i>
+	                <div class="windowShow">
+	                监控说明
+	                <div></div>
+	            </div>
+	            </i>
+	        </a>
+	        <p>6,650</p>
+	    </div>
+	</div>
+
+    <div class="content">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>公司</th>
+                    <th>车辆总数</th>
+                    <th>监控车辆</th>
+                    <th>监控车辆占比</th>
+                    <th>出车总数</th>
+                    <th>出车总数占比</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>长沙公交集团</td>
+                    <td>683</td>
+                    <td>683</td>
+                    <td>3%</td>
+                    <td>683</td>
+                    <td>39%</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

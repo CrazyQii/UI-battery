@@ -1,0 +1,20 @@
+/* 车辆列表详细信息--表单--搜索栏 */
+
+.search-top {
+    margin-left: 15px;
+    font-size: 14px;
+}
+
+.i-blue-bottom {
+    vertical-align: middle;
+    background: url(../images/箭头-蓝色.png);
+}
+
+.i-set {
+    vertical-align: middle;
+    background: url(../images/工具-齿轮.png) no-repeat;
+}
+
+.order {
+    background: url(../images/排序.png) no-repeat;
+}
