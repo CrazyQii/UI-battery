@@ -15,19 +15,19 @@
 <!--车辆标题-->
 {% block content %}
 <form>
-    <div class="form-inline">
-        <label for="carNum">车辆自编号:</label>
-        <div class="form-group form-group-sm">
-            <input type="text" class="form-control form-control-sm ml-2" name="carNum" id="carNum" placeholder="请输入车辆自编号">
+     <div class="w-75 form-inline">
+        <div class="w-50 form-group">
+            <label for="carNum">车辆自编号:</label>
+            <input type="text" class="w-75 form-control form-control-sm ml-2" name="carNum" id="carNum" placeholder="请输入车辆自编号">
         </div>
         <button type="submit" class="btn btn-primary btn-sm ml-4">查 询</button>
-        <button type="submit" class="btn btn-light btn-sm ml-2">重 置</button>
+        <button type="submit" class="btn btn-outline-secondary btn-sm ml-2">重 置</button>
         <button type="submit" class="btn btn-link btn-sm ml-2"><span class="caret">展开</span> <i class="icon i-blue-bottom ml-1"></i></button>
     </div>
     <div class="search-bottom mt-4 px-3 row">
-        <button type="submit" class="btn btn-light btn-sm col-1">导出</button>
+        <button type="submit" class="btn btn-outline-secondary btn-sm col-1">导出</button>
         <div class="col-10"></div>
-        <button type="submit" class="btn btn-light btn-sm col-1"><i class="icon i-set"></i>设置</button>
+        <button type="submit" class="btn btn-outline-secondary btn-sm col-1"><i class="icon i-set"></i>设置</button>
     </div>
 </form>
 

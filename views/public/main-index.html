@@ -1,11 +1,12 @@
-<!DOCTYPE html>
-<html>
+{% block html %}
+{% endblock %}
 <head>
   <title>{{ title }}</title>
   <link rel="stylesheet" href="/stylesheets/style.css">
   <link rel="stylesheet" href="/stylesheets/bootstrap.min.css">
   {% block css %}
   {% endblock %}
+ 
 </head>
 <body>
 	<div id="container">
@@ -29,4 +30,6 @@
 </body>
 	<script src="/javascripts/jquery.js"></script>
 	<script src="/javascripts/base.js"></script>
+	{% block javascript %}
+  	{% endblock %}
 </html>

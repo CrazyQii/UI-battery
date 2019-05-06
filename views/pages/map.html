@@ -1,8 +1,73 @@
-{% extends "../public/main.html" %}
+{% extends "../public/main-index.html" %}
 
+{% block html %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+{% endblock %}
 
+{% block css %}
+<link rel="stylesheet" href="/stylesheets/map.css">
+{% endblock %}
+
+{% block javascript %}
+<script src="http://api.map.baidu.com/api?key=&v=1.1&services=true"></script>
+<script src="/javascripts/map.js"></script>
+{% endblock %}
 
 {% block body %}
-  <h1>{{ title }}<h1>
-  <p>Welcome to {{ title }}</p>
+<div class="map-container">
+	<!--百度地图容器-->
+	<div style="width:100%;height:100%;border:#ccc solid 1px;" id="dituContent"></div>
+	<!-- 公司查询 -->
+	<div class="map-search">
+	<form class="form-inline w-100">
+	    <h3>地图分布</h3>
+	    <input type="text" class="ml-3 form-control form-control-sm" placeholder="全部公司" list="confirms">
+	    <datalist id="confirms">
+	            <option value="公交第一分公司"></option>
+	            <option value="公交第二分公司"></option>
+	            <option value="公交第三分公司"></option>
+	            <option value="公交第四分公司"></option>
+	            <option value="公交第五分公司"></option>
+	            <option value="公交第六分公司"></option>
+	        </datalist>
+	    <input type="text" class="ml-3 form-control form-control-sm w-50" placeholder="输入车辆自编号精准查询">
+	</form>
+	</div>
+	<!-- 车辆详细信息 -->
+	<div class="map-detail">
+	<nav class="map-detail-today p-3">
+	    <h6>今日里程数</h6>
+	    <h4>2342公里</h4>
+	</nav>
+
+	<div class="map-detail-content">
+	    <ul class="list-unstyled px-3 mt-2">
+	        <li>
+	            <span class="position-relative">
+	                <i class="icon i-good-car mb-1"></i>
+	                <i class="icon i-middle-car mb-1 position-absolute position-right"></i>
+	                <i class="icon i-low-car mb-1 position-absolute position-left"></i>
+	            </span>
+	            <span>在线车辆</span>
+	            <span class="float-right">1000辆</span>
+	        </li>
+	        <li>
+	            <span><i class="icon i-good-car mb-1 mr-1"></i>电量充足 |</span>
+	            <span class="car-current">64%</span>
+	            <span class="float-right">1000辆</span>
+	        </li>
+	        <li>
+	            <span><i class="icon i-middle-car mb-1 mr-1"></i>电量较足 |</span>
+	            <span class="car-current"> 64%</span>
+	            <span class="float-right">1000辆</span>
+	        </li>
+	        <li>
+	            <span><i class="icon i-low-car mb-1 mr-1"></i>电量过低 |</span>
+	            <span class="car-current">64%</span>
+	            <span class="float-right">1000辆</span>
+	        </li>
+	    </ul>
+	</div>
+</div>
 {% endblock %}
