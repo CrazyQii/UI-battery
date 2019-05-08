@@ -20,7 +20,7 @@
 	                </div>
 	            </i>
 	        </a>
-	        <p>￥125,560 </p>
+	        <p>{{ data.all_buses }}</p>
 	    </div>
 	    <div class="tag">出车总数
 	        <a href="#">
@@ -31,7 +31,7 @@
 	            </div>
 	            </i>
 	        </a>
-	        <p>8,846</p>
+	        <p>{{ data.all_out_buses }}</p>
 	    </div>
 	    <div class="tag">监控车辆
 	        <a href="#">
@@ -42,13 +42,13 @@
 	            </div>
 	            </i>
 	        </a>
-	        <p>6,650</p>
+	        <p>{{ data.all_spy_buses }}</p>
 	    </div>
 	</div>
 
     <div class="content">
         <table class="table table-hover table-striped">
-            <thead>
+            <thead class="font-normal">
                 <tr>
                     <th>公司</th>
                     <th>车辆总数</th>
@@ -59,15 +59,22 @@
                 </tr>
             </thead>
             <tbody>
+            	{% for index in data.data %}
                 <tr>
-                    <td>长沙公交集团</td>
-                    <td>683</td>
-                    <td>683</td>
-                    <td>3%</td>
-                    <td>683</td>
-                    <td>39%</td>
+                    <td>{{ index.company_name }}公交车集团</td>
+                    <td>{{ index.company_all_buses }}</td>
+                    <td>{{ index.company_spy_buses }}</td>
+                    <td>{{ (index.company_spy_buses/index.company_all_buses) | getPersent }}%</td>
+                    <td>{{ index.company_out_buses }}</td>
+                    <td>{{ (index.company_out_buses/index.company_all_buses) | getPersent }}%</td>
                 </tr>
+				{% endfor %}
             </tbody>
         </table>
     </div>
+
+    <script type="text/javascript">
+	console.log({{ data |dump |safe}})
+	</script>
 {% endblock %}
+

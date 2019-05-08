@@ -33,7 +33,7 @@
 
 <div class="mt-4">
     <table class="table table-hover">
-        <thead class="thead-light">
+        <thead>
             <tr>
                 <th>车辆自编号</th>
                 <th>车辆型号</th>
@@ -47,22 +47,67 @@
                 <th>操作</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="font-sm">
+            {% for index in data.company_buses %}
             <tr>
-                <td><a href="../html/车辆详情.html">CL-507</a></td>
-                <td>万象-K 786
-                </td>
-                <td>5路</td>
-                <td>浙A 83B29</td>
-                <td>2018/01/01</td>
-                <td>30%</td>
-                <td>启动</td>
-                <td>662公里</td>
-                <td>654公里</td>
-                <td><a href="../html/车辆详情.html">充电记录</a></td>
+                <td><a href="{{ index.operate_record }}">{{ index.bus_of_id }}</a></td>
+                <td>万象-K{{ index.type_of_bus }}</td>
+                <td>{{ index.route_of_bus }}路</td>
+                <td>浙A{{ index.lisence_of_bus}}</td>
+                <td>{{ index.start_of_bus }}</td>
+                {% if index.rest_power < 25%}
+                    <td class="battery-warn">{{ index.rest_power }}%</td>
+                {% else %}
+                    <td>{{ index.rest_power }}%</td>
+                {% endif %}
+                {% if index.state %}
+                    <td>启动</td>
+                {% else %}
+                    <td>未启动</td>
+                {% endif %}
+                <td>{{ index.thery_of_meters }}公里</td>
+                <td>{{ index.run_of_meters }}公里</td>
+                <td><a href="{{ index.operate_record }}">充电记录</a></td>
             </tr>
+            {% endfor %}
         </tbody>
     </table>
 </div>
+
+<!-- 跳转导航 -->
+<nav aria-label="Page navigation">
+    <ul class="pagination pagination-sm justify-content-end">
+        <li class="page-item">
+            <a class="page-link rounded" href="#" aria-label="Previous">
+                <span aria-hidden="true"><img src="../images/箭头-左.png"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <li class="page-item "><a class="page-link rounded" href="#">1</a></li>
+        <li class="page-item"><a class="page-link rounded" href="#">2</a></li>
+        <li class="page-item"><a class="page-link rounded" href="#">3</a></li>
+        <li class="page-item">
+            <a class="page-link rounded" href="#" aria-label="Next">
+                <span aria-hidden="true"><img src="../images/箭头-右.png"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+        <li class="page-item">
+            <select class="custom-select custom-select-sm" id="navigetorSelect">
+                <option selected>10条/页</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+            </select>
+        </li>
+        <li class="page-item form-inline">
+            <span class="mx-2">跳至</span><input type="number" class="page-link form-control form-control-sm text-center w-25" value="1"><span class="ml-2">页</span>
+        </li>
+    </ul>
+</nav>
+
+<script type="text/javascript">
+console.log({{ data |dump |safe}})
+</script>
 {% endblock %}
 

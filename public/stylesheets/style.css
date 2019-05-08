@@ -13,7 +13,7 @@
     justify-content: flex-start;
     width: 100%;
     min-width: 900px;
-    height: 900px;
+    min-height: 700px;
     background-color: #f0f2f5;
 }
 
@@ -21,10 +21,10 @@
 /* 侧边栏 */
 
 aside {
+    position: relative;
     padding-top: 20px;
     width: 20%;
     min-width: 200px;
-    height: 100%;
     background-color: #001629;
     box-sizing: border-box;
 }
@@ -142,6 +142,18 @@ aside {
     padding: 30px;
     background-color: #fff;
     box-sizing: border-box;
+}
+
+.font-sm {
+    font-size: 14px;
+}
+
+.font-normal {
+    font-size: 16px;
+}
+
+.battery-warn {
+    color: red !important;
 }
 
 /* 头部 */

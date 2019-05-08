@@ -1,0 +1,13 @@
+{% extends "../public/main-index.html" %} 
+
+{% block html %}
+<!DOCTYPE html>
+<html lang="en">
+{% endblock %}
+
+{% block body %} 
+this is {{title}}
+<script type="text/javascript">
+	console.log({{ data |dump |safe}})
+</script>
+{% endblock %}
