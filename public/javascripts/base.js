@@ -22,4 +22,56 @@ $(function() {
         $(this).children("li .i-right").toggleClass("i-bottom");
         $(this).children("li .i-right").toggleClass("i-top");
     })
+
+
+    // ============================
+    // 报表页面-----过滤tab
+    // ============================
+    filterTab();
+    function filterTab() {
+        var trs = $('tbody').children();
+        var trLength = trs.length;
+        // 设置默认表格样式
+        for(let i = 0; i < trLength; i++) {
+            var tr = trs[i];
+            if (tr.getAttribute('tab') == "day") {
+                tr.style.display = "flex";
+            } else {
+                tr.style.display = "none";
+            }
+        }
+        // 点击日报，显示样式
+        $('#day').click(function() {
+            for(let i = 0; i < trLength; i++) {
+                var tr = trs[i];
+                if (tr.getAttribute('tab') == "day") {
+                    tr.style.display = "flex";
+                } else {
+                    tr.style.display = "none";
+                }
+            }
+        })
+        $('#month').click(function() {
+            for(let i = 0; i < trLength; i++) {
+                var tr = trs[i];
+                if (tr.getAttribute('tab') == "month") {
+                    tr.style.display = "flex";
+                } else {
+                    tr.style.display = "none";
+                }
+            }
+        })
+        $('#year').click(function() {
+            for(let i = 0; i < trLength; i++) {
+                var tr = trs[i];
+                if (tr.getAttribute('tab') == "year") {
+                    tr.style.display = "flex";
+                } else {
+                    tr.style.display = "none";
+                }
+            }
+        })
+    }
+    
 })
+

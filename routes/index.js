@@ -107,7 +107,36 @@ router.get('/detail', function(req, res, next) {
 
 /* GET 报表下载 page */
 router.get('/report', function(req, res, next) {
-  res.render('pages/report', { title: '报表下载' });
+  res.render('pages/report', { 
+    title: '报表下载',
+    data: Mock.mock({
+      "success": true,
+      "report_of_day|5": [{
+        "type": "day",
+        "_id": "@id",
+        "update_day": "@datetime(yyyy/mm/dd hh:mm:ss)",
+        "report_of_bus": "@url",
+        "type_of_bus": "@url",
+        "both_of_bus": "@url"
+      }],
+      "report_of_month|5": [{
+        "type": "month",
+        "_id": "@id",
+        "update_day": "@date(yyyy/mm)",
+        "report_of_bus": "@url",
+        "type_of_bus": "@url",
+        "both_of_bus": "@url"
+      }],
+      "report_of_year|5": [{
+        "type": "year",
+        "_id": "@id",
+        "update_day": "@date(yyyy)",
+        "report_of_bus": "@url",
+        "type_of_bus": "@url",
+        "both_of_bus": "@url"
+      }]
+    })
+  });
 });
 
 
