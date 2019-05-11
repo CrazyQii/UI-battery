@@ -1,16 +1,29 @@
 $(function() {
+    // ======================
     // 隐藏和显示侧边栏
+    // ======================
     $("#header").children("a").click(function() {
         $("aside").animate({ width: 'toggle' }, 5);
     })
 
-    //显示当前页面的第二级标题栏
-    showTitle($("title").text());
 
+    //==============================
+    //显示当前页面的第二级标题栏
+    //==============================
+    showTitle($("title").text());
+    
     function showTitle(title) {
-        if (title == "首页") {
-            $("li[title='batteryWatch']").children("ul").show();
-            $("li[title='batteryWatch']").find("a").addClass("current");
+        var listLength = $('.child-item').length;
+        var lists = $('.child-item');
+        for(let i = 0; i < listLength; i++) {
+            var list = lists[i];
+            var text = list.innerHTML;
+            // 如果title等于侧导航栏,显示其栏目
+            if (text == title) {
+                list.className = "current";
+                list.parentNode.parentNode.parentNode.children[0].children[1].className = "current";
+                list.parentNode.parentNode.style.display = "inline-block";
+            }
         }
     }
 
@@ -29,7 +42,7 @@ $(function() {
     // ============================
     filterTab();
     function filterTab() {
-        var trs = $('tbody').children();
+        var trs = $('#report').children();
         var trLength = trs.length;
         // 设置默认表格样式
         for(let i = 0; i < trLength; i++) {

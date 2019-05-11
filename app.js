@@ -6,40 +6,16 @@ var bodyParser = require('body-parser');
 var logger = require('morgan');
 var nunjucks = require('nunjucks');
 
+
 //引入jquery
 const jsdom = require('jsdom');
 const { JSDOM } = jsdom;
 const { window } = new JSDOM(`<!DOCTYPE html>`);
 const $ = require('jquery')(window);
 
-
-// // 导入Mongoose模块
-// const mongoose = require('mongoose');
-
-// // 设置mongoose连接
-// const mongoDB = "mongodb+srv://HanlqMongoDB:hsy98106@cluster0-ctroo.azure.mongodb.net/test?retryWrites=true";
-// mongoose.connect(mongoDB);
-
-// // mongoose使用全局Promise库
-// mongoose.Promise = global.Promise;
-// // 取得默认连接
-// const db = mongoose.connection;
-
-// // 添加连接监听事件
-// db.on('error', () => {console.log( 'MongoDB 连接错误')});
-// db.on('connected', () => {console.log( 'MongoDB 连接成功')});
-// db.on('disconnected', ()=> {console.log( 'MongoDB 已断开连接')});
-
 // 连接MongoDB
-// const MongoClient = require('mongodb').MongoClient;
-// const uri = "mongodb+srv://HanlqMongoDB:hsy98106@cluster0-ctroo.azure.mongodb.net/test?retryWrites=true";
-// const client = new MongoClient(uri, { useNewUrlParser: true });
-// client.connect(err => {
-//   const collection = client.db("test").collection("devices");
-//   // perform actions on the collection object
-//   client.close();
-// });
-
+const mongoose = require('mongoose');
+require('./connect.js');
 
 // 设置路由
 var indexRouter = require('./routes/index');
@@ -59,7 +35,15 @@ var env = nunjucks.configure('views', {
 // 获取百分比
 env.addFilter('getPersent', function(data) {
     data = (Math.round(data * 10000)) / 100;
-    return data;
+    if(data > 100 || data < 0) {
+        return null;
+    } else {
+        return data;
+    }
+})
+// 格式化数字
+env.addFilter('formatNum', function(data) {
+    return data.toLocaleString();
 })
 
 

@@ -20,7 +20,7 @@
 	                </div>
 	            </i>
 	        </a>
-	        <p>{{ data.all_buses }}</p>
+	        <p>{{ ownBusCount | formatNum }}</p>
 	    </div>
 	    <div class="tag">出车总数
 	        <a href="#">
@@ -31,7 +31,7 @@
 	            </div>
 	            </i>
 	        </a>
-	        <p>{{ data.all_out_buses }}</p>
+	        <p>{{ outBusCount | formatNum }}</p>
 	    </div>
 	    <div class="tag">监控车辆
 	        <a href="#">
@@ -42,7 +42,7 @@
 	            </div>
 	            </i>
 	        </a>
-	        <p>{{ data.all_spy_buses }}</p>
+	        <p>{{ spyBusCount | formatNum }}</p>
 	    </div>
 	</div>
 
@@ -59,14 +59,14 @@
                 </tr>
             </thead>
             <tbody>
-            	{% for index in data.data %}
+            	{% for index in data %}
                 <tr>
-                    <td>{{ index.company_name }}公交车集团</td>
-                    <td>{{ index.company_all_buses }}</td>
-                    <td>{{ index.company_spy_buses }}</td>
-                    <td>{{ (index.company_spy_buses/index.company_all_buses) | getPersent }}%</td>
-                    <td>{{ index.company_out_buses }}</td>
-                    <td>{{ (index.company_out_buses/index.company_all_buses) | getPersent }}%</td>
+                    <td>{{ index.name }}</td>
+                    <td>{{ index.own_buses }}</td>
+                    <td>{{ index.spy_buses }}</td>
+                    <td>{{ (index.spy_buses/index.own_buses) | getPersent }}%</td>
+                    <td>{{ index.out_buses }}</td>
+                    <td>{{ (index.out_buses/index.own_buses) | getPersent }}%</td>
                 </tr>
 				{% endfor %}
             </tbody>

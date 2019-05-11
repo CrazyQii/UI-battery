@@ -1,47 +1,51 @@
 var express = require('express');
 var router = express.Router();
+var mongoose = require('mongoose');
 // 引入mockjs
 var Mock = require('mockjs');
+require('./../models/company.js');
+
+
+
+
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log("coming home");
-  res.render('pages/index', { 
-    title: '首页',
-    // 获取数据
-    data: Mock.mock({
-        "success": true,
-        "all_buses": function() {
-          let sum = 0;
-          for (let i = 0; i < this.data.length; i++) {
-            sum = this.data[i].company_all_buses + sum;
-          }
-          return sum;
-        },
-        "all_spy_buses": function() {
-          let spySum = 0;
-          for (let i = 0; i < this.data.length; i++) {
-            spySum = this.data[i].company_spy_buses + spySum;
-          }
-          return spySum;
-        },
-        "all_out_buses": function() {
-          let outSum = 0;
-          for (let i = 0; i < this.data.length; i++) {
-            outSum = this.data[i].company_out_buses + outSum;
-          }
-          return outSum;
-        },
-        "data|10": [{
-          "_id": "@id",
-          "company_id": "@id",
-          "company_name": "@city",
-          "company_all_buses": "@integer(50, 500)",
-          "company_spy_buses": "@integer(50, 500)",
-          "company_out_buses": "@integer(50, 500)"
-        }]
-      })
-  });
+  var ownBusCount = 0;
+  var outBusCount = 0;
+  var spyBusCount = 0;
+  // 引入model模型
+  var Company = mongoose.model('Company');
+  mongoose.Promise = global.Promise;
+  // 从数据库查找数据
+  Company.find({}, function(err, data) {
+    if(err) {
+      console.log("查询失败" + err);
+      return;
+    }
+    // 循环遍历数据,计算车辆总和
+    data.forEach(function(doc) {
+      if (doc.own_buses) {
+        ownBusCount = ownBusCount + doc.own_buses;
+      }
+      if (doc.out_buses) {
+        outBusCount = outBusCount + doc.out_buses;
+      }
+      if (doc.spy_buses) {
+        spyBusCount = spyBusCount + doc.spy_buses;
+      }
+    })
+    // 渲染数据和页面
+    res.render('pages/index', { 
+      title: '首页', 
+      'data': data, 
+      'ownBusCount': ownBusCount,
+      'outBusCount': outBusCount,
+      'spyBusCount': spyBusCount
+    });
+  })
+
 });
 
 
@@ -79,7 +83,7 @@ router.get('/carlist', function(req, res, next) {
 /* GET 低电量车列表 page */
 router.get('/lowpowerlist', function(req, res, next) {
   res.render('pages/lowpowerlist', { 
-    title: '低电量车列表',
+    title: '低电量监控',
     data: Mock.mock({
       "success": true,
       "company_buses|10": [{

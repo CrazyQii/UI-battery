@@ -88,6 +88,12 @@ aside {
     color: #9099a1;
 }
 
+.child-item {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
 
 /* 侧边栏--第一级菜单--小图标 */
 
@@ -110,6 +116,7 @@ aside {
 }
 
 .current {
+    margin-left: 10px;
     color: #fafafa;
 }
 
