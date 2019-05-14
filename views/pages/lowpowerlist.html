@@ -30,22 +30,22 @@
 </form>
 
 <div class="mt-4">
-<table class="table table-hover">
+<table class="table table-hover font-normal">
     <thead>
         <tr>
             <th>车辆自编号</th>
             <th>车辆型号</th>
-            <th>线路<i class="icon order"></i></th>
+            <th class="position-relative">线路<i class="icon order position-absolute"></i></th>
             <th>车牌号</th>
-            <th>车辆启用时间<i class="icon order"></i></th>
-            <th>剩余电量<i class="icon order"></i></th>
+            <th class="position-relative">车辆启用时间<i class="icon order position-absolute"></i></th>
+            <th class="position-relative">剩余电量<i class="icon order position-absolute"></i></th>
             <th>状态</th>
             <th>理论续航里程</th>
             <th>当日行驶里程</th>
             <th>操作</th>
         </tr>
     </thead>
-    <tbody class="font-sm">
+    <tbody>
         {% for index in data.company_buses %}
         <tr>
             <td><a href="{{ index.operate_record }}">{{ index.bus_of_id }}</a></td>

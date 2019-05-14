@@ -116,7 +116,6 @@ aside {
 }
 
 .current {
-    margin-left: 10px;
     color: #fafafa;
 }
 
@@ -152,11 +151,11 @@ aside {
 }
 
 .font-sm {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .font-normal {
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .battery-warn {

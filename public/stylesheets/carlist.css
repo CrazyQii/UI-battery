@@ -16,5 +16,45 @@
 }
 
 .order {
+	right: 10px;
+	top: 50%;
+	margin-top: -6px;
     background: url(../images/排序.png) no-repeat;
+}
+
+
+/* 删除按钮 */
+#deleteBus {
+    display: none;
+}
+
+/* 遮蔽层 */
+#mask {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 100%;
+    z-index: 999;
+    opacity: .5;
+    background: #000 none no-repeat scroll 0% 0%;
+}
+
+#newBus {
+    position: fixed;
+    top: 5px;
+    left: 25%;
+    width: 50%;
+    height: 95%;
+    display: none;
+    z-index: 9999;
+    background-color: #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.close {
+    position: fixed;
+    right: 26%;
 }

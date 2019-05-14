@@ -20,6 +20,7 @@ require('./connect.js');
 // 设置路由
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var apiRouter = require('./routes/api');
 
 var app = express();
 
@@ -45,6 +46,35 @@ env.addFilter('getPersent', function(data) {
 env.addFilter('formatNum', function(data) {
     return data.toLocaleString();
 })
+// 转换日期格式
+env.addFilter('formatDate', function(data) {
+    var formatDate = function (date) { 
+        // 年 
+        var y = date.getFullYear();  
+        // 月
+        var m = date.getMonth() + 1;  
+        // 如果小于10,则前面一位加0
+        m = m < 10 ? ('0' + m) : m;  
+        // 天
+        var d = date.getDate();  
+        d = d < 10 ? ('0' + d) : d;  
+        // 小时
+        var h = date.getHours();  
+        // 分钟
+        var minute = date.getMinutes();  
+        minute = minute < 10 ? ('0' + minute) : minute; 
+        // 秒
+        var second= date.getSeconds();  
+        second = minute < 10 ? ('0' + second) : second;  
+        return y + '-' + m + '-' + d;  
+    }  
+    if(data == null || data == '') {
+        return '';
+    }
+    else {
+        return formatDate(data);
+    }
+})
 
 
 // view engine setup
@@ -69,6 +99,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/api', apiRouter);
     
 //设置跨域访问
 app.all('*', function(req, res, next) {

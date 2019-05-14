@@ -14,47 +14,78 @@
 
 <!--车辆标题-->
 {% block content %}
+<div id="mask"></div>
+<div id="newBus">
+    <form class="form-group px-5" id="busForm">
+        <button type="button" class="close" aria-label="Close" id="closeBtn">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h3 class="text-center text-right">添加车辆信息</h3>
+        <label for="carId">车辆所属公司:</label>
+        <input type="text" class="w-100 form-control" id="companyBus" placeholder="长沙公交集团" value="长沙公交集团">
+        <label for="busId">车辆自编号:</label>
+        <input type="text" class="w-100 form-control" id="busId" placeholder="KL-442" value="KL-442">
+        <label for="busType">车辆型号:</label>
+        <input type="text" class="w-100 form-control" id="busType" placeholder="万象-K412" value="万象-K412">
+        <label for="busRoute">车辆线路:</label>
+        <input type="text" class="w-100 form-control" id="busRoute" placeholder="15路" value="15路">
+        <label for="busNum">车牌号:</label>
+        <input type="text" class="w-100 form-control" id="busNum" placeholder="浙A 888A8" value="浙A 888A8">
+        <label for="startTime">车辆启用时间:</label>
+        <input type="date" class="w-100 form-control" id="startTime" placeholder="2018/12/01">
+        <label for="theryMeters">理论续航里程:</label>
+        <input type="text" class="w-100 form-control" id="theryMeters" placeholder="800公里" value="800">
+        <button type="button" class="mt-2 w-100 btn btn-outline-primary" id="submitBus" onclick="showdiv('表达数据提交中<br/>请稍候........ <br/>');">确认</button>
+        <button type="reset" class="mt-2 w-100 btn btn-outline-warning">重置</button>
+    </form>
+</div>
+
 <form>
      <div class="w-75 form-inline">
         <div class="w-50 form-group">
             <label for="carNum">车辆自编号:</label>
-            <input type="text" class="w-75 form-control form-control-sm ml-2" name="carNum" id="carNum" placeholder="请输入车辆自编号">
+            <input type="text" class="w-75 form-control form-control-sm ml-2" name="carNum" id="searchBus" placeholder="请输入车辆自编号">
         </div>
-        <button type="submit" class="btn btn-primary btn-sm ml-4">查 询</button>
+        <button type="button" class="btn btn-primary btn-sm ml-4" id="searchBtn">查 询</button>
         <button type="submit" class="btn btn-outline-secondary btn-sm ml-2">重 置</button>
         <button type="submit" class="btn btn-link btn-sm ml-2"><span class="caret">展开</span> <i class="icon i-blue-bottom ml-1"></i></button>
     </div>
     <div class="search-bottom mt-4 px-3 row">
         <button type="submit" class="btn btn-outline-secondary btn-sm col-1">导出</button>
-        <div class="col-10"></div>
-        <button type="submit" class="btn btn-outline-secondary btn-sm col-1"><i class="icon i-set"></i>设置</button>
+        <div class="col-9"></div>
+        <button type="button" class="btn btn-outline-primary btn-sm col-1" id="addBus">添加车辆</button>
+        <button type="button" class="btn btn-outline-danger btn-sm col-1" id="deleteBus">删除</button>
     </div>
 </form>
 
 <div class="mt-4">
-    <table class="table table-hover">
+    <table class="table table-hover font-normal">
         <thead>
             <tr>
+                <th><input type="checkbox" class="busSelect" name="allBusSelect" id="allBusSelect"></th>
                 <th>车辆自编号</th>
                 <th>车辆型号</th>
-                <th>线路<i class="icon order"></i></th>
+                <th class="position-relative">线路<i class="icon order position-absolute"></i></th>
                 <th>车牌号</th>
-                <th>车辆启用时间<i class="icon order"></i></th>
-                <th>剩余电量<i class="icon order"></i></th>
+                <th class="position-relative">车辆启用时间<i class="icon order position-absolute"></i></th>
+                <th class="position-relative">剩余电量<i class="icon order position-absolute"></i></th>
                 <th>状态</th>
                 <th>理论续航里程</th>
                 <th>当日行驶里程</th>
                 <th>操作</th>
             </tr>
         </thead>
-        <tbody class="font-sm">
-            {% for index in data.company_buses %}
+        <tbody id="tbody">
+            {% for index in data %}
             <tr>
-                <td><a href="{{ index.operate_record }}">{{ index.bus_of_id }}</a></td>
-                <td>万象-K{{ index.type_of_bus }}</td>
-                <td>{{ index.route_of_bus }}路</td>
-                <td>浙A{{ index.lisence_of_bus}}</td>
-                <td>{{ index.start_of_bus }}</td>
+                <td><input type="checkbox" class="busSelect" name="busSelect"></td>
+                <td>
+                    <a href="{{ index.operate_record }}">{{ index.id_of_bus }}</a>
+                </td>
+                <td>{{ index.type_of_bus }}</td>
+                <td>{{ index.route_of_bus }}</td>
+                <td>{{ index.license_of_bus}}</td>
+                <td>{{ index.start_of_bus | formatDate }}</td>
                 {% if index.rest_power < 25%}
                     <td class="battery-warn">{{ index.rest_power }}%</td>
                 {% else %}
