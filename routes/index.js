@@ -6,6 +6,7 @@ var Mock = require('mockjs');
 require('./../models/company.js');
 require('./../models/bus.js');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   console.log("coming home");
@@ -57,11 +58,12 @@ router.post('/carlist', function(req, res, next) {
   // 引入model模型
   var Bus = mongoose.model('Bus');
   mongoose.Promise = global.Promise;
-  // 判断是否需要添加数据
+
+  // 添加数据
   if(req.body.addBus) {
     // 根据公交车牌号来判断公交车是否存在 
     if(req.body.busNum) {
-    Bus.count({ //数已存在数量
+    Bus.count({ //已存在数量
       license_of_bus: req.body.busNum
     }, function(err, data) {
         console.log('公交车存在数量: '+ data);
@@ -97,19 +99,19 @@ router.post('/carlist', function(req, res, next) {
               Bus.find({}, function(err, data) {
                 if(err) {
                 console.log('查询失败!' + err);
-                res.send(err)
+                res.send(false)
                 }
                 res.render('pages/carlist', {data: data});
               }).sort({put_time: -1}) //对输入数据的时间进行排序
             }
           })
-        } else if(data > 0) {  //如果已经存在该公交车
+        } else if(data > 0) {  //如果已经存在该公交车,返回false
           res.send(false)
         }
-    })
+      })
+    }
   }
-    
-  }
+
   // 删除数据
   if(req.body.deleteBus) {
     Bus.remove({
@@ -123,11 +125,26 @@ router.post('/carlist', function(req, res, next) {
         console.log('删除数据成功');
         res.send('success');
       }
-      
     })
+  }
+
+  // 查询数据
+  if(req.body.queryBusId) {
+    var val = req.body.busId;
+    Bus.find({ 
+      id_of_bus: req.body.busId
+    }, function(err, data) {
+      if(err) {
+        console.log('查询错误' + err);
+        res.send(false);
+      } else {
+        res.send(data)
+      }
+    }).sort({put_time: -1})
   }
   
 })
+
 
 /* GET 车辆列表 page */
 router.get('/carlist', function(req, res, next) {

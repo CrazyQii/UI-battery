@@ -11,7 +11,7 @@ mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 
 // 添加连接监听事件
-db.on('error', () => {console.log( 'MongoDB 连接错误' + error)});
+db.on('error', () => {console.log( 'MongoDB 连接错误')});
 db.on('open', () => {console.log( 'MongoDB 连接成功')});
 db.on('disconnected', ()=> {console.log( 'MongoDB 已断开连接')});
 

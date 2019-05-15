@@ -14,7 +14,9 @@
 
 <!--车辆标题-->
 {% block content %}
-<div id="mask"></div>
+<div id="mask">
+    <img src="./images/loading.gif" alt="">
+</div>
 <div id="newBus">
     <form class="form-group px-5" id="busForm">
         <button type="button" class="close" aria-label="Close" id="closeBtn">
@@ -35,7 +37,7 @@
         <input type="date" class="w-100 form-control" id="startTime" placeholder="2018/12/01">
         <label for="theryMeters">理论续航里程:</label>
         <input type="text" class="w-100 form-control" id="theryMeters" placeholder="800公里" value="800">
-        <button type="button" class="mt-2 w-100 btn btn-outline-primary" id="submitBus" onclick="showdiv('表达数据提交中<br/>请稍候........ <br/>');">确认</button>
+        <button type="button" class="mt-2 w-100 btn btn-outline-primary" id="submitBus">确认</button>
         <button type="reset" class="mt-2 w-100 btn btn-outline-warning">重置</button>
     </form>
 </div>
@@ -44,11 +46,11 @@
      <div class="w-75 form-inline">
         <div class="w-50 form-group">
             <label for="carNum">车辆自编号:</label>
-            <input type="text" class="w-75 form-control form-control-sm ml-2" name="carNum" id="searchBus" placeholder="请输入车辆自编号">
+            <input type="text" class="w-75 form-control form-control-sm ml-2" name="carNum" id="searchBus" placeholder="请输入车辆自编号" autocomplete="off">
         </div>
-        <button type="button" class="btn btn-primary btn-sm ml-4" id="searchBtn">查 询</button>
-        <button type="submit" class="btn btn-outline-secondary btn-sm ml-2">重 置</button>
-        <button type="submit" class="btn btn-link btn-sm ml-2"><span class="caret">展开</span> <i class="icon i-blue-bottom ml-1"></i></button>
+        <button type="button" class="btn btn-primary btn-sm ml-4" 
+        id="searchBtn">查 询</button>
+        <button type="reset" class="btn btn-outline-secondary btn-sm ml-2" id="resetBtn">重 置</button>
     </div>
     <div class="search-bottom mt-4 px-3 row">
         <button type="submit" class="btn btn-outline-secondary btn-sm col-1">导出</button>

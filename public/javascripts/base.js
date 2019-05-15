@@ -30,6 +30,7 @@ $(function() {
         }
     }
 
+
     // ==============================
     // 添加第一级菜单栏事件
     // ==============================
@@ -134,10 +135,12 @@ $(function() {
     }
 
 
+
     // =================================
     // 车辆信息添加遮蔽层
     // =================================
     $('#addBus').click(function(event) {
+        $('#mask').css({'width': window.screen.availWidth + "px", 'height': window.screen.availWidth + "px"})
         $('#mask').show();
         $('#newBus').show();
     });
@@ -148,7 +151,7 @@ $(function() {
     
      
     // ==================================
-    // Ajax提交信息
+    // Ajax提交公交车信息
     // ==================================
     $('#submitBus').click(function(event) {
         if($.trim($('#companyBus').val()).length == 0) {
@@ -180,12 +183,7 @@ $(function() {
             return;
         }
         else {
-            // $.post('/carlist', {
-            //     query: true,
-            //     busNum: $.trim($('#busNum').val()),
-            // }, function(data) {
-            //     console.log(data)
-            // })
+            $('#mask').css({'zIndex': 99999}).show();
             // 提交信息到后端
             $.post('/carlist', {
                 // 获取表单数据
@@ -200,14 +198,15 @@ $(function() {
                 putTime: new Date()
             }, function(data, status) {     // 数据成功提交且数据没有重复的回调函数
                 if(status == 'success' && data != false) {
-                    $('#mask').hide();
+                    $('#mask').css({'zIndex': 999}).hide();
                     $('#newBus').hide();
                     alert('信息提交成功!');
                     // 提交成功后自动刷新页面--------------重点
                     location.reload(true)
                 }
                 else {
-                    alert('公交车牌号信息已经存在，请重新检查');
+                    $('#mask').css({'zIndex': 999}).show();
+                    alert('公交车牌号已经存在，请重新检查');
                 }
             });  
         } 
@@ -251,17 +250,19 @@ $(function() {
 
 
     // ==================================
-    // 删除信息
+    // 删除公交车信息
     // ==================================
     $('#deleteBus').click(function(event) {
-        $('#tbody').find('input:checkbox').each(function() {
-            if($(this).prop('checked') == true) {
+        $('#mask').show();
+        $('#tbody').find('input:checkbox').each(function() {    //遍历删除已选的公交车
+            if($(this).prop('checked') == true) {   
                 var currentTr = $(this).parent().parent()
                 var license = $(this).parent().parent().children('td:nth-child(5)');
                 $.post('/carlist', {    //Ajax--------------重点
                     deleteBus: true,
                     selBusLicense: license.text()
                 }, function(data, status) {
+                    $('#mask').show();
                     if(data == 'success' && status == 'success') {
                         currentTr.remove();
                         location.reload(true);
@@ -272,19 +273,93 @@ $(function() {
                 })
             } 
         })
+        $('#mask').hide();
     });
 
 
     // ==================================
-    // Ajax异步查询
+    // Ajax查询公交车信息
     // ==================================
+    // 点击搜索按钮
     $('#searchBtn').click(function() {
-        var search = $('#searchBus').val();
-        if($.trim(search).length == 0) {
+        var val = $.trim($('#searchBus').val());
+        if($.trim(val).length == 0) {
             alert('查询不能为空');
+            $('#mask').show();
+            location.reload(true);
         } else {
-            
+            $(this).attr('value', val);
+            $('#mask').show();
+            $.post('/carlist', {
+                queryBusId: true,
+                busId: val
+            }, function(data, status) {
+                if(status == 'success') {
+                    // 清空表格内容
+                    $('#tbody').children().remove();
+                    for(let i = 0 ; i < data.length; i++) {
+                        var tr = '<tr>' + 
+                        '<td><input type="checkbox" class="busSelect" name="busSelect"></td>' +
+                        '<td><a href="' + data[i].operate_record + '">' + data[i].id_of_bus + '</td>' + 
+                        '<td>' + data[i].type_of_bus + '</td>' +
+                        '<td>' + data[i].route_of_bus + '</td>' +
+                        '<td>' + data[i].license_of_bus + '</td>' +
+                        '<td>' + formatDate(data[i].start_of_bus) + '</td>' +
+                        '<td ' + function() {
+                            if(data[i].rest_power < 25) {
+                                return 'class=battery-warn';
+                            }
+                        }() + ' >' +  data[i].rest_power + '</td>' +
+                        '<td>' + function() {
+                            if(data[i].state) {
+                                return '启动';
+                            } else {
+                                return '未启动';
+                            }
+                        }() + '</td>' +
+                        '<td>' + data[i].thery_of_meters + '公里</td>' +
+                        '<td>' + data[i].run_of_meters + '公里</td>' +
+                        '<td><a href="' + data[i].operate_record + '">' + '操作记录</td>' +
+                        '</tr>'
+                        $('#tbody').append(tr);
+                    }
+                    $('#mask').hide();
+                } else {
+                    alert('查询失败')
+                    $('#mask').hide();
+                }
+            })
         }
     })
+    // 点击重置按钮
+    $('#resetBtn').click(function() {
+        $('#mask').show();
+        location.reload(true);
+    }) 
+
+    // =====================================
+    // 格式化时间
+    // =====================================
+    var formatDate = function (date) { 
+        date = new Date(date)
+        // 年 
+        var y = date.getFullYear();  
+        // 月
+        var m = date.getMonth() + 1;  
+        // 如果小于10,则前面一位加0
+        m = m < 10 ? ('0' + m) : m;  
+        // 天
+        var d = date.getDate();  
+        d = d < 10 ? ('0' + d) : d;  
+        // 小时
+        var h = date.getHours();  
+        // 分钟
+        var minute = date.getMinutes();  
+        minute = minute < 10 ? ('0' + minute) : minute; 
+        // 秒
+        var second= date.getSeconds();  
+        second = minute < 10 ? ('0' + second) : second;  
+        return y + '-' + m + '-' + d;  
+    }  
 })
 
