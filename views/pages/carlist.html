@@ -42,7 +42,7 @@
     </form>
 </div>
 
-<form>
+<form onsubmit="return false;">
      <div class="w-75 form-inline">
         <div class="w-50 form-group">
             <label for="carNum">车辆自编号:</label>
@@ -111,7 +111,7 @@
 <nav aria-label="Page navigation">
     <ul class="pagination pagination-sm justify-content-end">
         <li class="page-item change-page">
-            <button class="page-link rounded" id="pre" value="previous">
+            <button class="page-link rounded" value="previous">
                 <span aria-hidden="true"><img src="../images/箭头-左.png"></span>
                 <span class="sr-only">Previous</span>
             </button>
@@ -123,7 +123,7 @@
         </li>
         {% endfor %}
         <li class="page-item change-page">
-            <button class="page-link rounded" id="next" value="next">
+            <button class="page-link rounded" value="next">
                 <span aria-hidden="true"><img src="../images/箭头-右.png"></span>
                 <span class="sr-only">Next</span>
             </button>

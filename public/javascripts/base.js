@@ -294,6 +294,7 @@ $(function() {
                 queryBusId: true,
                 busId: val
             }, function(data, status) {
+                console.log(data)
                 if(status == 'success') {
                     freshTable($('#tbody'), data);
                     $('#mask').hide();
@@ -361,9 +362,18 @@ $(function() {
         });  
     });
     // 点击选择框
-    $('.change-page').blur(function(data) {
+    $('.change-page').click(function(data) {
         $('#mask').show();
-        var currentPage = $(this).children().val();
+        var getPage = $(this).children('button').val();
+        var prePage = parseInt($('.page').find('.index-page').val());
+        if(getPage == 'previous') {
+            var currentPage = prePage - 1;
+            if(currentPage <= 0) currentPage = 1;
+        } 
+        if(getPage == 'next') {
+            var currentPage = prePage + 1;
+            if(currentPage > $('.page').length) currentPage = $('.page').trLength;
+        }
         $.post('/carlist', {
             getPage: true,
             currentPage: currentPage
@@ -405,7 +415,7 @@ $(function() {
             }
         });  
     })
-
+    // 点击input输入框
     $('.select').click(function(event) {
         $('#mask').show();
         var currentPage = $(this).children().val()
