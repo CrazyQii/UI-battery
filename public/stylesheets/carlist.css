@@ -65,3 +65,9 @@
     top: 20px;
     right: 23%;
 }
+
+/* 分页按钮 */
+.index-page {
+    background-color: #007bff;
+    color: #fff;
+}

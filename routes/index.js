@@ -55,61 +55,70 @@ router.get('/map', function(req, res, next) {
 
 /* POST 车辆列表 page */
 router.post('/carlist', function(req, res, next) {
+  var pageSize = 10;      // 当前页最大数
   // 引入model模型
   var Bus = mongoose.model('Bus');
   mongoose.Promise = global.Promise;
 
   // 添加数据
   if(req.body.addBus) {
-    // 根据公交车牌号来判断公交车是否存在 
-    if(req.body.busNum) {
-    Bus.count({ //已存在数量
-      license_of_bus: req.body.busNum
-    }, function(err, data) {
-        console.log('公交车存在数量: '+ data);
-        if(err) {
-          console.log('查询数据错误'+err);
-          res.send(false);
-        } else if(data == 0){
-          // 将获取到的数据插入数据库
-          var bus = new Bus({
-            own_of_company:  req.body.companyBus,
-            id_of_bus:  req.body.busId,
-            type_of_bus:  req.body.busType,
-            route_of_bus:  req.body.busRoute,
-            license_of_bus:  req.body.busNum,
-            start_of_bus:  req.body.startTime,
-            rest_power: 100,
-            state: false,
-            thery_of_meters: req.body.theryMeters,
-            run_of_meters: 0,
-            operate_record: null,
-            VIN: 4654231454646,
-            power_of_storage: 1000,
-            v_standard: 32,
-            put_time: req.body.putTime
-          });
-          // 将数据存储到数据库当中
-          bus.save(function(err) {
-            if(err) {
-              console.log('数据存储状态: ' + err);
-              res.send(false);
-            } else {
-              // 查找数据，并返回给Ajax
-              Bus.find({}, function(err, data) {
-                if(err) {
-                console.log('查询失败!' + err);
-                res.send(false)
-                }
-                res.render('pages/carlist', {data: data});
-              }).sort({put_time: -1}) //对输入数据的时间进行排序
-            }
-          })
-        } else if(data > 0) {  //如果已经存在该公交车,返回false
-          res.send(false)
-        }
-      })
-    }
+    // 查询车辆自编号是否存在
+    Bus.count({id_of_bus:  req.body.busId}, function(err, data) {
+      console.log('车辆自编号存在数量:' + data)
+      if(err) { console.log('查询错误'); res.send(false);} 
+      else if(data != 0) {
+        res.send(false);
+      } 
+      else {
+        // 查询车牌照是否存在
+        Bus.count({ 
+        license_of_bus: req.body.busNum
+      }, function(err, data) {
+          console.log('车牌照存在数量: '+ data);
+          if(err) {
+            console.log('查询数据错误'+err);
+            res.send(false);
+          } else if(data == 0){
+            // 将获取到的数据插入数据库
+            var bus = new Bus({
+              own_of_company:  req.body.companyBus,
+              id_of_bus:  req.body.busId,
+              type_of_bus:  req.body.busType,
+              route_of_bus:  req.body.busRoute,
+              license_of_bus:  req.body.busNum,
+              start_of_bus:  req.body.startTime,
+              rest_power: Mock.mock({"rest_power": "@integer(1, 25)"}),
+              state: Mock.mock({"state": "@boolean"}),
+              thery_of_meters: req.body.theryMeters,
+              run_of_meters: Mock.mock({"run_of_meters": "@float(100, @thery_of_meters, 0, 2)"}),
+              operate_record: null,
+              VIN: 4654231454646,
+              power_of_storage: Mock.mock({"rest_power": "@integer(800, 2000)"}), 
+              v_standard: 32,
+              put_time: req.body.putTime
+            });
+            // 将数据存储到数据库当中
+            bus.save(function(err) {
+              if(err) {
+                console.log('数据存储状态: ' + err);
+                res.send(false);
+              } else {
+                // 查找数据，并返回给Ajax
+                Bus.find({}, function(err, data) {
+                  if(err) {
+                  console.log('查询失败!' + err);
+                  res.send(false)
+                  }
+                  res.render('pages/carlist', {data: data});
+                }).sort({put_time: -1}) //对输入数据的时间进行排序
+              }
+            })
+          } else if(data > 0) {  //如果已经存在该公交车,返回false
+            res.send(false)
+          }
+        })
+      }
+    });
   }
 
   // 删除数据
@@ -118,7 +127,7 @@ router.post('/carlist', function(req, res, next) {
       license_of_bus:  req.body.selBusLicense
     },function(err, data) {
       if(err) {
-        console.log('删除数据失败'+err);
+        console.log('删除数据失败' + err);
         res.send('fail');
         return;
       } else {
@@ -131,37 +140,69 @@ router.post('/carlist', function(req, res, next) {
   // 查询数据
   if(req.body.queryBusId) {
     var val = req.body.busId;
-    Bus.find({ 
-      id_of_bus: req.body.busId
-    }, function(err, data) {
-      if(err) {
-        console.log('查询错误' + err);
-        res.send(false);
-      } else {
-        res.send(data)
-      }
-    }).sort({put_time: -1})
+    Bus.find({id_of_bus: val})
+      .sort({put_time: -1})
+      .limit(pageSize)
+      .exec(function(err, data) {
+        if(err) {
+          console.log('查询错误' + err);
+          res.send(false);
+        } else {
+          res.send(data)
+        }
+      })
   }
   
+  // 分页设置
+  if(req.body.getPage) {
+    var currentPage = req.body.currentPage;
+    Bus.find()
+      .sort({put_time: -1})
+      .skip((currentPage - 1) * pageSize)
+      .limit(pageSize)
+      .exec(function(err, data) {
+        if(err) { 
+          console.log('查询失败' + err);
+          res.send(false);
+        }
+        else {
+          res.send({data, currentPage});
+        }
+      })
+  }
 })
 
 
 /* GET 车辆列表 page */
 router.get('/carlist', function(req, res, next) {
   var Bus = mongoose.model('Bus');
-  Bus.find({}, function(err, data) {
+  mongoose.Promise = global.Promise;
+  var sum = 0;              //文档总数量
+  var pageSize = 10;        //单页最大展示数量
+  var pages = 0;            //页数
+  var page = [];            //页数数组
+  Bus.count({}, function(err, data) {
     if(err) {
       alert('查询失败!');
       return;
     }
-    res.render('pages/carlist', { 
-      title: '车辆列表',
-      // 获取数据
-      data: data
-    });
-  }).sort({put_time: -1})
+    else {
+      sum = data;              //获取文档总数
+      Bus.find().sort({put_time: -1}).limit(pageSize).exec(function(err,  data) {
+        pages = Math.ceil(sum / pageSize);      // 获取页数
+        for(let i = 1; i <= pages; i++) {       // 组成数组，便于前端渲染
+          page.push(i);       
+        }
+        res.render('pages/carlist', { 
+          title: '车辆列表',
+          // 获取数据
+          data: data,
+          page: page
+        });
+      })
+    }
+  })
 });
-
 
 
 /* GET 低电量车列表 page */
