@@ -17,7 +17,11 @@ const BusSchema = new Schema({
 	own_of_company: String,		//所属公司
 	power_of_storage: Number,	//存储总量
 	v_standard: Number,			//额定电压
-	put_time: Date				//记录时间
+	put_time: Date,				//记录时间
+	points: {					//记录地理坐标	
+		LoacationX: Number,
+		LoacationY: Number
+	}
 })
 
 module.exports = mongoose.model('Bus', BusSchema);

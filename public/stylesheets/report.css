@@ -1,0 +1,51 @@
+/* 删除按钮 */
+#deleteReport {
+    display: none;
+}
+
+/* 遮蔽层 */   
+#mask {
+    position: fixed; 
+    top: 0;
+    left: 0;
+    display: none;
+    width: 100%;
+    height: 800px;
+    z-index: 999;
+    opacity: .5;
+    background: #000 none no-repeat scroll 0% 0%;
+}
+
+#mask img {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+}
+
+#newReport {
+    position: fixed;
+    top: 50%;
+    left: 35%;
+    padding-top: 40px;
+    margin-top: -150px;
+    width: 40%;
+    height: 300px;
+    display: none;
+    z-index: 9999;
+    background-color: #fff;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.close {
+    position: fixed;
+    top: 50%;
+    right: 30%;
+    margin-top: -130px;
+}
+
+/* 分页按钮 */
+.index-page {
+    background-color: #007bff;
+    color: #fff;
+}

@@ -1,9 +1,31 @@
+var formatDate = function (date) { 
+    date = new Date(date)
+    // 年 
+    var y = date.getFullYear();  
+    // 月
+    var m = date.getMonth() + 1;  
+    // 如果小于10,则前面一位加0
+    m = m < 10 ? ('0' + m) : m;  
+    // 天
+    var d = date.getDate();  
+    d = d < 10 ? ('0' + d) : d;  
+    // 小时
+    var h = date.getHours();  
+    // 分钟
+    var minute = date.getMinutes();  
+    minute = minute < 10 ? ('0' + minute) : minute; 
+    // 秒
+    var second= date.getSeconds();  
+    second = minute < 10 ? ('0' + second) : second;  
+    return y + '-' + m + '-' + d;  
+}
+
 //创建和初始化地图函数：
 function initMap() {
     createMap(); //创建地图
     setMapEvent(); //设置地图事件
     addMapControl(); //向地图添加控件
-    setMarker(points); //设置公交车
+    // setMarker(points); //设置公交车
 }
 
 //创建地图函数：
@@ -39,79 +61,70 @@ function addMapControl() {
 }
 
 //设置标点标记
-function setMarker(points) {
-    for (let i = 0; i < points.length; i++) {
-        //设置图标
-        var myIcon = new BMap.Icon("../images/公交车.png", new BMap.Size(15, 15), {
-            offset: new BMap.Size(10, -5) //图片中央下端尖角位置
-        });
-        var point = new BMap.Point(points[i][0], points[i][1]); //获取公交车经纬度坐标
-        var marker = new BMap.Marker(point, { icon: myIcon }); //创建标注
-        map.addOverlay(marker); //添加标注
+function setMarker(pointX, pointY, license, time, id, route, power, meters) {
+    time = formatDate(time);
+    //设置图标
+    var myIcon = new BMap.Icon("../images/公交车.png", new BMap.Size(15, 15), {
+        offset: new BMap.Size(10, -5) //图片中央下端尖角位置
+    });
+    var point = new BMap.Point(pointX, pointY); //获取公交车经纬度坐标
+    var marker = new BMap.Marker(point, { icon: myIcon }); //创建标注
+    map.addOverlay(marker); //添加标注
 
 
-        marker.addEventListener("click", function() { //添加监听事件
-            var opts = { //创建公交车信息框
-                width: 250,
-                height: 150,
-                title: "<h3>浙A 88888</h3>"
-            };
-            var sContent = //设置公交车详细信息
-                "<hr> <div style='width: 100%; height: 100%;  font-size: 14px; color: #555'>" +
-                "<p style='margin-top: 8px;'> 启用时间: <span> 2018-09-20 </span> </p>" +
-                "<p style='margin-top: 8px;'> 车辆自编号: <span> 2-7777 </span></p>" +
-                "<p style='margin-top: 8px;'><span> 归属线路: <span> 1路</span> </span>" +
-                "<span style='margin-left: 60px;'> 剩余电量: <span> 30% </span> </span></p>" +
-                "<p style='margin-top: 8px;'><span> 理论续航: <span> 78公里 </span></span>" +
-                "<span style='margin-left: 43px;'> 速度: <span>20KM/h</span> </span></p> </div>";
-            var infoindows = new BMap.InfoWindow(sContent, opts); //初始化信息框
-            this.openInfoWindow(infoindows); //点击跳出信息框
-        });
-
-    }
+    marker.addEventListener("click", function() { //添加监听事件
+        var opts = { //创建公交车信息框
+            width: 250,
+            height: 150,
+            title: "<h5>" + license + "</h5>"
+        };
+        var sContent = //设置公交车详细信息
+            "<hr> <div style='width: 100%; height: 100%;  font-size: 14px; color: #555'>" +
+            "<p style='margin-top: -0.5rem;'> 启用时间: <span> " + time + " </span> </p>" +
+            "<p style='margin-top: -0.5rem;'> 车辆自编号: <span>" + id + "</span></p>" +
+            "<p style='margin-top: -0.5rem;'><span> 归属线路: <span> " + route + "</span> </span>" +
+            "<span style='margin-left: 25px;'> 剩余电量: <span> " + power + "% </span> </span></p>" +
+            "<p style='margin-top: -0.5rem;'><span> 理论续航: <span>" + meters + " </span></span>" +
+            "<span style='margin-left: 30px;'> 速度: <span>20KM/h</span> </span></p> </div>";
+        var infoindows = new BMap.InfoWindow(sContent, opts); //初始化信息框
+        this.openInfoWindow(infoindows); //点击跳出信息框
+    });
 }
 
-//设置公交车经纬度
-var points = [
-    [120.353563, 30.314966],
-    [120.354474, 30.317446],
-    [120.354435, 30.314046],
-    [120.354450, 30.314464],
-    [120.375693, 30.316460],
-    [120.345633, 30.315440],
-    [120.375669, 30.310450],
-    [120.375649, 30.352480],
-    [120.373569, 30.354980],
-    [120.370479, 30.350480],
-    [120.340419, 30.350480],
-    [120.340410, 30.350384],
-    [120.352651, 30.324895],
-    [120.35549, 30.307234],
-    [120.364581, 30.31601],
-    [120.324617, 30.31548],
-    [120.361041, 30.310772],
-    [120.364455, 30.317896],
-    [120.364742, 30.312986],
-    [120.364019, 30.316977],
-    [120.354843, 30.32184],
-    [120.36079, 30.315885],
-    [120.348807, 30.324833],
-    [120.360808, 30.314794],
-    [120.354879, 30.323664],
-    [120.329049, 30.322040],
-    [120.36097, 30.312737],
-    [120.35496, 30.315246],
-    [120.353352, 30.312207],
-    [120.355328, 30.308902],
-    [120.359748, 30.312612],
-    [120.35001, 30.312004],
-    [120.344884, 30.314507],
-    [120.347992, 30.315738],
-    [120.352573, 30.312138],
-    [120.349752, 30.312823],
-    [120.35001, 30.312004],
-    [120.350058, 30.309503],
-    [120.344614, 30.312855]
-];
+initMap(); //创建和初始化地图
 
-initMap(); //创建和初始化地图yy
+
+// 选择查看公交车的公司
+$('#selConfirm').blur(function(val) {
+    $('#mask').css({'zIndex': 99999}).show();
+    $.post('/map', {
+        selMap: true,
+        sel_company: $(this).val()
+    }, function(data, status) {
+        if(status == 'success') {
+            initMap();  
+            console.log(data)
+            var buses = data.buses;
+            for (var i = 0; i < buses.length; i++) {
+                // 获取公交车坐标，并添加到地图当中
+                var point = buses[i].points;
+                var pointX = buses[i].points.LoacationX;
+                var pointY = buses[i].points.LoacationY;
+                setMarker(pointX, pointY, buses[i].license_of_bus, buses[i].start_of_bus, buses[i].id_of_bus, buses[i].route_of_bus, buses[i].rest_power, buses[i].thery_of_meters);
+            }
+            // 修改今日里程数侧栏
+            $('nav').find('h4').text(data.totalMeter + '公里');
+            // 车辆总数
+            $('#onlineBus').text(data.sum + '辆');
+            // 电量情况
+            $('#fullBus').find('.float-right').text(data.fullBus + '辆');
+            $('#goodBus').find('.float-right').text(data.goodBus + '辆');
+            $('#badBus').find('.float-right').text(data.badBus + '辆');
+            // 电量百分比
+            $('#fullBus').find('.car-current').text((data.fullBus / data.sum) * 100 + '%');
+            $('#goodBus').find('.car-current').text((data.goodBus / data.sum) * 100+ '%');
+            $('#badBus').find('.car-current').text((data.badBus / data.sum) * 100 + '%');
+            $('#mask').css({'zIndex': 999}).hide();
+        }
+    });
+})

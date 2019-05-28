@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var Mock = require('mockjs');
 require('./../models/company.js');
 require('./../models/bus.js');
+require('./../models/report.js');
 
 
 /* GET home page. */
@@ -43,13 +44,71 @@ router.get('/', function(req, res, next) {
       'spyBusCount': spyBusCount
     });
   })
-
 });
 
 
 /* GET map page */
 router.get('/map', function(req, res, next) {
-  res.render('pages/map', { title: '地图' });
+  var Company = mongoose.model('Company');
+  mongoose.Promise = global.Promise;
+  // 从数据库查找数据
+  Company.find({}, function(err, data) {
+    if(err) {
+      console.log("查询失败" + err);
+      res.send(false);
+      return;
+    } else {
+      res.render('pages/map', { 
+        title: '地图',
+        data: data
+      });
+    } 
+  })
+});
+
+
+/* POST map page */
+router.post('/map', function(req, res, next) {
+  var totalMeter = 0;
+  var sum = 0;
+  var fullBus = 0;
+  var goodBus = 0;
+  var badBus = 0;
+  var Bus = mongoose.model('Bus');
+  mongoose.Promise = global.Promise;
+  // 从数据库查找数据
+  if (req.body.selMap) {
+    Bus.find({own_of_company: req.body.sel_company})
+      .sort({put_time: -1})
+      .exec(function(err, data) {
+      if(err) {
+        console.log("查询失败" + err);
+        res.send(false);
+        return;
+      } else {
+        data.forEach(function(doc) {
+          totalMeter = totalMeter + doc.run_of_meters;  // 总里程
+          sum++;  // 在线车辆
+          if(doc.rest_power > 25) {
+              fullBus++;
+          } else if(doc.rest_power <= 25 && doc.rest_power > 10) {
+              goodBus++;
+          } else {
+              badBus++;
+          }
+        });
+        var allData = {
+          buses: data,              // 公交车信息
+          totalMeter: totalMeter,   // 总里程
+          sum: sum,                 // 在线车辆总数
+          fullBus: fullBus,         // 充足电量
+          goodBus: goodBus,         // 较足电量
+          badBus: badBus            // 电量过低
+        }
+        res.send(allData)
+      } 
+    })
+  }
 });
 
 
@@ -87,15 +146,19 @@ router.post('/carlist', function(req, res, next) {
               route_of_bus:  req.body.busRoute,
               license_of_bus:  req.body.busNum,
               start_of_bus:  req.body.startTime,
-              rest_power: Mock.mock({"rest_power": "@integer(1, 25)"}),
-              state: Mock.mock({"state": "@boolean"}),
+              rest_power: Mock.mock("@integer(1, 100)"),
+              state: Mock.mock("@boolean"),
               thery_of_meters: req.body.theryMeters,
-              run_of_meters: Mock.mock({"run_of_meters": "@float(100, @thery_of_meters, 0, 2)"}),
+              run_of_meters: Mock.mock("@float(50, 400, 0, 2)"),
               operate_record: null,
-              VIN: 4654231454646,
-              power_of_storage: Mock.mock({"rest_power": "@integer(800, 2000)"}), 
+              VIN: Mock.mock("@id"),
+              power_of_storage: Mock.mock("@integer(800, 2000)"), 
               v_standard: 32,
-              put_time: req.body.putTime
+              put_time: req.body.putTime,
+              points: {        
+                LoacationX: Mock.mock("@float(120, 120, 6, 6)"),
+                LoacationY: Mock.mock("@float(30, 30, 6, 6)")
+              }
             });
             // 将数据存储到数据库当中
             bus.save(function(err) {
@@ -207,67 +270,165 @@ router.get('/carlist', function(req, res, next) {
 
 /* GET 低电量车列表 page */
 router.get('/lowpowerlist', function(req, res, next) {
-  res.render('pages/lowpowerlist', { 
-    title: '低电量监控',
-    data: Mock.mock({
-      "success": true,
-      "company_buses|10": [{
-      "bus_of_title|2": "@character('upper')",
-      "bus_of_num": "@integer(100, 999)",
-      "bus_of_id": "@bus_of_title - @bus_of_num",
-      "type_of_bus": "@integer(100, 999)",
-      "route_of_bus": "@integer(1, 500)",
-      "lisence_of_bus": "@string(5)",
-      "start_of_bus": "@date(yyyy/mm/dd)",
-      "rest_power": "@integer(1, 25)",
-      "state": "@boolean",
-      "thery_of_meters": "@integer(100, 1000)",
-      "run_of_meters": "@float(100, @thery_of_meters, 0, 2)",
-      "operate_record": "@url()"
-    }]
-    })
-  });
+  var Bus = mongoose.model('Bus');
+  mongoose.Promise = global.Promise;
+  var sum = 0;              //文档总数量
+  var pageSize = 10;        //单页最大展示数量
+  var pages = 0;            //页数
+  var page = [];            //页数数组
+  Bus.count({rest_power: {$lte: 25}}).exec(function(err, data) {
+    if(err) {
+      alert('查询失败!');
+      return;
+    }
+    else {
+      sum = data;              //获取文档总数
+      Bus.find({rest_power: {$lte: 25}}).sort({put_time: -1}).limit(pageSize).exec(function(err,  data) {
+        pages = Math.ceil(sum / pageSize);      // 获取页数
+        for(let i = 1; i <= pages; i++) {       // 组成数组，便于前端渲染
+          page.push(i);       
+        }
+        res.render('pages/carlist', { 
+          title: '低电量监控',
+          // 获取数据
+          data: data,
+          page: page
+        });
+      })
+    }
+  })
 });
+
+
+/* POST 低电量车列表 page */
+router.post('/lowpowerlist', function(req, res, next) {
+  var Bus = mongoose.model('Bus');
+  mongoose.Promise = global.Promise;
+  var sum = 0;              //文档总数量
+  var pageSize = 10;        //单页最大展示数量
+  var pages = 0;            //页数
+  var page = [];            //页数数组
+  Bus.count({rest_power: {$lte: 25}}, function(err, data) {
+    if(err) {
+      alert('查询失败!');
+      return;
+    }
+    else {
+      sum = data;              //获取文档总数
+      Bus.find({rest_power: {$lte: 25}}).sort({put_time: -1}).limit(pageSize).exec(function(err,  data) {
+        pages = Math.ceil(sum / pageSize);      // 获取页数
+        for(let i = 1; i <= pages; i++) {       // 组成数组，便于前端渲染
+          page.push(i);       
+        }
+        res.render('pages/carlist', { 
+          title: '低电量监控',
+          // 获取数据
+          data: data,
+          page: page
+        });
+      })
+    }
+  })
+});
+
 
 /* GET 车辆详情 page */
 router.get('/detail', function(req, res, next) {
-  res.render('pages/detail', { title: '车辆详情' });
+  var Bus = mongoose.model('Bus');
+  mongoose.Promise = global.Promise;
+  if(req.query.id) {
+    Bus.find({_id: req.query.id}).exec(function(err, data) {
+      if(err) { 
+        console.log("查询失败");
+      } else {
+        res.render('pages/detail', { title: '车辆详情' , data: data});
+      }
+    })
+  } else {  //直接渲染车辆列表
+    res.render('pages/detail', { title: '车辆详情'});
+  }
 });
+
 
 /* GET 报表下载 page */
 router.get('/report', function(req, res, next) {
-  res.render('pages/report', { 
-    title: '报表下载',
-    data: Mock.mock({
-      "success": true,
-      "report_of_day|5": [{
-        "type": "day",
-        "_id": "@id",
-        "update_day": "@datetime(yyyy/mm/dd hh:mm:ss)",
-        "report_of_bus": "@url",
-        "type_of_bus": "@url",
-        "both_of_bus": "@url"
-      }],
-      "report_of_month|5": [{
-        "type": "month",
-        "_id": "@id",
-        "update_day": "@date(yyyy/mm)",
-        "report_of_bus": "@url",
-        "type_of_bus": "@url",
-        "both_of_bus": "@url"
-      }],
-      "report_of_year|5": [{
-        "type": "year",
-        "_id": "@id",
-        "update_day": "@date(yyyy)",
-        "report_of_bus": "@url",
-        "type_of_bus": "@url",
-        "both_of_bus": "@url"
-      }]
-    })
-  });
+  var sum = 0;              //文档总数量
+  var pageSize = 10;        //单页最大展示数量
+  var pages = 0;            //页数
+  var page = [];            //页数数组
+  var Report = mongoose.model('Report');
+  mongoose.Promise = global.Promise;
+  Report.count({type_report: '日报'}).exec(function(err, data) {
+    if(err) {
+      console.log("报表查询错误" + err);
+      res.send(false);
+    } else {
+      sum = data;
+      Report.find().sort({put_time: -1}).limit(pageSize).exec(function(err,  data) {
+        pages = Math.ceil(sum / pageSize);      // 获取页数
+        for(let i = 1; i <= pages; i++) {       // 组成数组，便于前端渲染
+          page.push(i);       
+        }
+        res.render('pages/report', { 
+          title: '报表下载',
+          // 获取数据
+          data: data,
+          page: page
+        });
+      })
+    }
+  })
 });
 
+
+/* POST 报表下载 page */
+router.post('/report', function(req, res, next) {
+  var Report = mongoose.model('Report');
+  mongoose.Promise = global.Promise;
+  var pageSize = 30;      // 当前页最大数
+
+  //添加数据
+  if(req.body.addReport) {
+    var report = new Report({
+      type_report: req.body.typeReport,
+      put_time: req.body.putTime,
+      id: Mock.mock("@id")
+    });
+    report.save(function(err) {
+      if(err) {
+        console.log('日志存储错误!' + err);
+        res.send(false);
+      } else {
+        // 查找数据，并返回给Ajax
+        Report.find({}, function(err, data) {
+          if(err) {
+          console.log('查询失败!' + err);
+          res.send(false)
+          }
+          res.render('pages/report', {data: data});
+        }).sort({put_time: -1}) //对输入数据的时间进行排序
+      }
+    })
+  }
+
+  // 分页设置
+  if(req.body.getPage) {
+    var currentPage = req.body.currentPage;
+    Report.find()
+      .sort({put_time: -1})
+      .skip((currentPage - 1) * pageSize)
+      .limit(pageSize)
+      .exec(function(err, data) {
+        if(err) { 
+          console.log('查询失败' + err);
+          res.send(false);
+        }
+        else {
+          res.send({data, currentPage});
+        }
+      })
+  }
+});
 
 
 /* GET test listing. */
