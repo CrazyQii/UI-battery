@@ -76,7 +76,7 @@ router.post('/map', function(req, res, next) {
   var badBus = 0;
   var Bus = mongoose.model('Bus');
   mongoose.Promise = global.Promise;
-  // 从数据库查找数据
+  // 查找对应公司的公交车
   if (req.body.selMap) {
     Bus.find({own_of_company: req.body.sel_company})
       .sort({put_time: -1})
@@ -109,7 +109,54 @@ router.post('/map', function(req, res, next) {
       } 
     })
   }
+
+  // 精确查询公交车
+  if(req.body.isBus) {
+    Bus.find({id_of_bus: req.body.sel_Bus}).exec(function(err, data) {
+      if(err) {
+        console.log('精确查询失败!' + err);
+        res.send(false);
+      } else if(data.length == 0) {
+          res.send(false);
+      } else {
+        res.send(data);
+      }
+    })
+  }
 });
+
+
+/* GET 车辆列表 page */
+router.get('/carlist', function(req, res, next) {
+  var Bus = mongoose.model('Bus');
+  mongoose.Promise = global.Promise;
+  var sum = 0;              //文档总数量
+  var pageSize = 10;        //单页最大展示数量
+  var pages = 0;            //页数
+  var page = [];            //页数数组
+  Bus.count({}, function(err, data) {
+    if(err) {
+      alert('查询失败!');
+      return;
+    }
+    else {
+      sum = data;              //获取文档总数
+      Bus.find().sort({put_time: -1}).limit(pageSize).exec(function(err,  data) {
+        pages = Math.ceil(sum / pageSize);      // 获取页数
+        for(let i = 1; i <= pages; i++) {       // 组成数组，便于前端渲染
+          page.push(i);       
+        }
+        res.render('pages/carlist', { 
+          title: '车辆列表',
+          // 获取数据
+          data: data,
+          page: page
+        });
+      })
+    }
+  })
+});
+
 
 
 /* POST 车辆列表 page */
@@ -234,38 +281,6 @@ router.post('/carlist', function(req, res, next) {
       })
   }
 })
-
-
-/* GET 车辆列表 page */
-router.get('/carlist', function(req, res, next) {
-  var Bus = mongoose.model('Bus');
-  mongoose.Promise = global.Promise;
-  var sum = 0;              //文档总数量
-  var pageSize = 10;        //单页最大展示数量
-  var pages = 0;            //页数
-  var page = [];            //页数数组
-  Bus.count({}, function(err, data) {
-    if(err) {
-      alert('查询失败!');
-      return;
-    }
-    else {
-      sum = data;              //获取文档总数
-      Bus.find().sort({put_time: -1}).limit(pageSize).exec(function(err,  data) {
-        pages = Math.ceil(sum / pageSize);      // 获取页数
-        for(let i = 1; i <= pages; i++) {       // 组成数组，便于前端渲染
-          page.push(i);       
-        }
-        res.render('pages/carlist', { 
-          title: '车辆列表',
-          // 获取数据
-          data: data,
-          page: page
-        });
-      })
-    }
-  })
-});
 
 
 /* GET 低电量车列表 page */

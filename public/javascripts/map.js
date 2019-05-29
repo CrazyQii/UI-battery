@@ -84,7 +84,7 @@ function setMarker(pointX, pointY, license, time, id, route, power, meters) {
             "<p style='margin-top: -0.5rem;'> 车辆自编号: <span>" + id + "</span></p>" +
             "<p style='margin-top: -0.5rem;'><span> 归属线路: <span> " + route + "</span> </span>" +
             "<span style='margin-left: 25px;'> 剩余电量: <span> " + power + "% </span> </span></p>" +
-            "<p style='margin-top: -0.5rem;'><span> 理论续航: <span>" + meters + " </span></span>" +
+            "<p style='margin-top: -0.5rem;'><span> 理论续航: <span>" + meters + "公里 </span></span>" +
             "<span style='margin-left: 30px;'> 速度: <span>20KM/h</span> </span></p> </div>";
         var infoindows = new BMap.InfoWindow(sContent, opts); //初始化信息框
         this.openInfoWindow(infoindows); //点击跳出信息框
@@ -103,7 +103,6 @@ $('#selConfirm').blur(function(val) {
     }, function(data, status) {
         if(status == 'success') {
             initMap();  
-            console.log(data)
             var buses = data.buses;
             for (var i = 0; i < buses.length; i++) {
                 // 获取公交车坐标，并添加到地图当中
@@ -128,3 +127,28 @@ $('#selConfirm').blur(function(val) {
         }
     });
 })
+
+
+// 精确查询公交车
+$('#selBus').blur(function(event) {
+    $('#mask').css({'zIndex': 99999}).show();
+    $.post('/map', {
+        isBus: true,
+        sel_Bus: $(this).val()
+    }, function(data, status) {
+        if(status == 'success') {
+            initMap();
+            if(data) {
+                var pointX = data[0].points.LoacationX;
+                var pointY = data[0].points.LoacationY;
+                setMarker(pointX, pointY, data[0].license_of_bus, data[0].start_of_bus, data[0].id_of_bus, data[0].route_of_bus, data[0].rest_power, data[0].thery_of_meters);
+                console.log(data);
+            } else {
+                alert('精确查询失败!');
+            }
+            $('#mask').css({'zIndex': 999}).hide();
+        } else {
+            location.reload(true);
+        }
+    })
+});
