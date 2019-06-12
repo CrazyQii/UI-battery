@@ -20,6 +20,10 @@ var formatDate = function (date) {
     return y + '-' + m + '-' + d;  
 }
 
+var getPersent = function(x, y) {
+    return (Math.floor((x / y) * 10000) / 100);
+}
+
 //创建和初始化地图函数：
 function initMap() {
     createMap(); //创建地图
@@ -120,9 +124,9 @@ $('#selConfirm').blur(function(val) {
             $('#goodBus').find('.float-right').text(data.goodBus + '辆');
             $('#badBus').find('.float-right').text(data.badBus + '辆');
             // 电量百分比
-            $('#fullBus').find('.car-current').text((data.fullBus / data.sum) * 100 + '%');
-            $('#goodBus').find('.car-current').text((data.goodBus / data.sum) * 100+ '%');
-            $('#badBus').find('.car-current').text((data.badBus / data.sum) * 100 + '%');
+            $('#fullBus').find('.car-current').text(getPersent(data.fullBus, data.sum) + '%');
+            $('#goodBus').find('.car-current').text(getPersent(data.goodBus, data.sum) + '%');
+            $('#badBus').find('.car-current').text(getPersent(data.badBus, data.sum) + '%');
             $('#mask').css({'zIndex': 999}).hide();
         }
     });

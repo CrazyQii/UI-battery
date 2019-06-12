@@ -173,8 +173,6 @@ $('#searchBtn').click(function() {
     var val = $.trim($('#searchBus').val());
     if($.trim(val).length == 0) {
         alert('查询不能为空');
-        $('#mask').show();
-        location.reload(true);
     } else {
         $(this).attr('value', val);
         $('#mask').show();
