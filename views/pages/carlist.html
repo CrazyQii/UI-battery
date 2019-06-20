@@ -4,6 +4,10 @@
 <link rel="stylesheet" href="/stylesheets/carlist.css">
 {% endblock %}
 
+{% block javascript %}
+<script src="/javascripts/carlist.js"></script>
+{% endblock %}
+
 {% block nav %}
 <nav class="current-page">
     <p>{{title}}</p>
@@ -82,7 +86,7 @@
             <tr>
                 <td><input type="checkbox" class="busSelect" name="busSelect"></td>
                 <td>
-                    <a href="{{ index.operate_record }}">{{ index.id_of_bus }}</a>
+                    <a href="/detail?id={{ index._id }}">{{ index.id_of_bus }}</a>
                 </td>
                 <td>{{ index.type_of_bus }}</td>
                 <td>{{ index.route_of_bus }}</td>
@@ -100,7 +104,7 @@
                 {% endif %}
                 <td>{{ index.thery_of_meters }}公里</td>
                 <td>{{ index.run_of_meters }}公里</td>
-                <td><a href="{{ index.operate_record }}">充电记录</a></td>
+                <td><a href="/detail?id={{ index._id }}">充电记录</a></td>
             </tr>
             {% endfor %}
         </tbody>

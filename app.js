@@ -75,6 +75,38 @@ env.addFilter('formatDate', function(data) {
         return formatDate(data);
     }
 })
+env.addFilter('formatMonth', function(data) {
+    var formatDate = function (date) { 
+        date = new Date(date)
+        // 年 
+        var y = date.getFullYear();  
+        // 月
+        var m = date.getMonth() + 1;  
+        // 如果小于10,则前面一位加0
+        m = m < 10 ? ('0' + m) : m;  
+        return y + '年' + m + '月';  
+    }  
+    if(data == null || data == '') {
+        return '';
+    }
+    else {
+        return formatDate(data);
+    }
+})
+env.addFilter('formatYear', function(data) {
+    var formatDate = function (date) { 
+       date = new Date(date)
+        // 年 
+        var y = date.getFullYear();    
+        return y + '年';  
+        }  
+    if(data == null || data == '') {
+        return '';
+    }
+    else {
+        return formatDate(data);
+    }
+})
 
 
 // view engine setup
